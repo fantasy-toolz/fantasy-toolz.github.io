@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div class="buttons"></div>
+<br />
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<style>
+
+.circleGroups text {
+	font: 10px sans-serif;
+}
+
+.title {
+	font: 20px sans-serif;
+}
+
+.axis .tick {
+	stroke: #bfbfbf;
+	stroke-dasharray: 1;
+	stroke-opacity: .5;
+}
+
+</style>
+
+<script>
+
+var margin = {top: 20, right: 10, bottom: 40, left: 40};
+
+var width = 400 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var xScale = d3.scaleLinear()
+	.domain([0, 162])
+	.range([0, width]);
+
+var yScale = d3.scaleLinear()
+	.domain([0, 300])
+	.range([height, 0]);
+
+var xAxis = d3.axisBottom(xScale)
+	.tickSize(-height);
+
+var yAxis = d3.axisLeft(yScale)
+	.tickSize(-width);
+
+svg.append("g")
+	.attr("class", "y axis")
+	.call(yAxis)
+
+svg.append("g")
+	.attr("class", "x axis")
+	.attr("transform","translate(0," + height + ")")
+	.call(xAxis)
+
+var colorScale = d3.scaleSequential(d3.interpolateRainbow);
+
+function dataSwap(datasetGroup) {
+
+	thisDataGroup = data.filter(function(d) { return d.group == datasetGroup })
+
+	thisDataGroup.sort(function(a, b) { return a.x - b.x });
+
+	svg.selectAll(".circleGroups")
+		.data(thisDataGroup)
+		.transition()
+		.delay(function(d, i) { return i*10; })
+		.attr("transform",function(d) { return "translate(" + xScale(d.x) + "," + yScale(d.y) + ")" })
+
+	svg.selectAll(".circleGroups")
+		.select("circle")
+		.transition()
+		.delay(function(d, i) { return i*40; })
+		.style("fill", function(d, i) { return colorScale(i); })
+
+	d3.select(".title")
+	  .text("Group " + datasetGroup)
+}
+
+
+d3.csv("rdiff.csv").then(function(data) {
+
+
+	window.data = data;
+	var groups = d3.set(data.map(function(d) { return d.group })).values();
+
+	d3.select(".buttons")
+	  .selectAll("button")
+		.data(groups)
+	  .enter().append("button")
+		.text(function(d) { return "Group " + d; })
+		.on("click", function(d) {
+
+			dataSwap(d);
+})
+    console.log(data[0]);
+
+
+
+	groupFourData = data.filter(function(d) { return d.group == "astros" })
+
+	groupFourData.sort(function(a, b) { return a.x - b.x });
+
+	colorScale.domain([0, groupFourData.length-1])
+
+	svg.append("text")
+	   .attr("class", "title")
+	   .attr("dy", -5)
+	   .text("Group " + groupFourData[0].group)
+
+	var circleGroups = svg.selectAll(".circleGroups")
+		.data(groupFourData)
+	  .enter().append("g")
+	  	.attr("class", "circleGroups")
+		.attr("transform",function(d) { return "translate(" + xScale(d.x) + "," + yScale(d.y) + ")" })
+		.on("mouseenter", function(d) {
+
+			d3.select(this)
+				.append("text")
+				.attr("dx", 5)
+				.attr("dy", 10)
+				.text("(" + d.x + "," + d.y + ")")
+
+			d3.selectAll("circle")
+			  .style("fill-opacity", .5);
+
+			d3.select(this)
+			  .select("circle")
+			  .transition()
+			  .ease(d3.easeElastic)
+			  .attr("r", 20)
+			  .style("fill-opacity", 1);
+		})
+		.on("mouseleave", function(d) {
+
+			d3.select(this)
+			  .select("text")
+			  .transition()
+			  .style("opacity", 0)
+			  .transition()
+			  .remove();
+
+			d3.select(this)
+			  .select("circle")
+			  .transition()
+			  .ease(d3.easeElastic)
+			  .attr("r", 10)
+
+			d3.selectAll("circle")
+			  .style("fill-opacity", 1);
+		})
+
+	var radiusSize = 10;
+
+	circleGroups.append("circle")
+		.attr("r", radiusSize)
+		.style("fill", function(d, i) { return colorScale(i); })
+
+	
+})
+
+</script>
+
+</body>
+
+</html>
