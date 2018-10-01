@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>D3 Test</title>
+<script type="text/javascript" src="d3/d3.js"></script>
+</head>
+
+<body>
+<style>
+body {
+  font: 11px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.dot {
+  stroke: #000;
+}
+
+.tooltip {
+  position: absolute;
+  width: 200px;
+  height: 28px;
+  pointer-events: none;
+}
+</style>
+
+<h1>Strikeouts on the Rise</h1>
+<p>Meaningful intro sentence here.</p>
+<p><a href="test.html">test me</a>
+<div class="chart"></div>
+
+<script>
+var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+
+// setup x 
+var xValue = function(d) { return d.year;}, // data -> value
+    xScale = d3.scaleLinear().domain([1900,2010]).range([0, width]), // value -> display
+    xMap = function(d) { return xScale(xValue(d));}, // data -> display
+    xAxis = d3.axisBottom(xScale);
+
+// setup y
+var yValue = function(d) { return d.kpg;}, // data -> value
+    yScale = d3.scaleLinear().domain([0,9]).range([height, 0]), // value -> display
+    yMap = function(d) { return yScale(yValue(d));}, // data -> display
+    yAxis = d3.axisLeft(yScale);
+
+
+// add the graph canvas to the body of the webpage
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+// add the tooltip area to the webpage
+var tooltip = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
+
+//https://stackoverflow.com/questions/49599691/how-to-load-data-from-a-csv-file-in-d3-v5
+
+d3.csv("strikeouts.csv").then(function(data){
+data.forEach(function(d) {
+        d.so = +d.so;
+        d.year = +d.year;
+        d.g = +d.g;
+        //We also want to calculate the strikeouts per game and store it as a new column
+        d.kpg = d.so / d.g;
+    });
+    console.log(data[0]);
+
+
+//groupFourData = data.filter(function(d) { return d.year == 1946 })
+
+  // x-axis
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+    .append("text")
+      .attr("class", "label")
+      .attr("x", width)
+      .attr("y", -6)
+      .style("text-anchor", "end")
+      .text("Calories");
+
+  // y-axis
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("class", "label")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Protein (g)");
+
+  // draw dots
+  svg.selectAll(".dot")
+.data(data)
+    .enter().append("circle")
+      .attr("class", "dot")
+      .attr("r", 3.5)
+      .attr("cx", xMap)
+      .attr("cy", yMap)
+      //.style("fill", function(d) { return color(cValue(d));}) 
+      .on("mouseover", function(d) {
+          tooltip.transition()
+               .duration(200)
+               .style("opacity", .9);
+          tooltip.html(d['histname'] + "<br/> (" + xValue(d) 
+	        + ", " + yValue(d) + ")")
+               .style("left", (d3.event.pageX + 5) + "px")
+               .style("top", (d3.event.pageY - 28) + "px");
+      })
+      .on("mouseout", function(d) {
+          tooltip.transition()
+               .duration(500)
+               .style("opacity", 0);
+      });
+});
+
+
+</script>
+
+<hr>
+<address></address>
+<!-- hhmts start -->Last modified: Mon Oct  1 13:22:21 EDT 2018 <!-- hhmts end -->
+</body> </html>

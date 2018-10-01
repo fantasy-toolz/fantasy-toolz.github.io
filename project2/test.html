@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--https://bl.ocks.org/d3indepth/2d51279bdad4a553b2005af680108257-->
+<meta charset="utf-8">
+<head>
+  <title>Scale example</title>
+</head>
+
+<style>
+body {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 12px;
+  color: #333;
+}
+text {
+	fill: #555;
+}
+.inner text {
+	text-anchor: middle;
+}
+</style>
+
+<body>
+
+<p><a href="index.html">go home</a></p>
+  <svg width="700" height="40">
+  	<g class="inner" transform="translate(40, 30)">
+  	</g>
+  </svg>
+
+<script type="text/javascript" src="d3/d3.js"></script>
+  <script>
+var data = [ 0, 2, 3, 5, 7.5, 9, 10 ];
+
+var myScale = d3.scaleLinear()
+  .domain([0, 10])
+  .range([0, 600]);
+
+d3.select('svg .inner')
+	.selectAll('circle')
+	.data(data)
+	.enter()
+	.append('circle')
+	.attr('r', 3)
+	.attr('cx', function(d) {
+		return myScale(d);
+	});
+
+d3.select('svg .inner')
+	.selectAll('text')
+	.data(data)
+	.enter()
+	.append('text')
+	.attr('x', function(d) {
+		return myScale(d);
+	})
+	.attr('y', -8)
+	.text(function(d) {
+		return d;
+	});
+
+  </script>
+</body>
+</html>
