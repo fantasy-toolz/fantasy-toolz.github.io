@@ -1,12 +1,28 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
 <html> <head>
-<title>D3 Test</title>
+<title>Target Field, 2019</title>
 <script src="https://d3js.org/d3.v5.min.js"></script>
 
 </head>
 
 <body>
 <style>
+
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 10%;
+    vertical-align: top;
+    overflow: hidden;
+}
+.svg-content {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 div.tooltip {
   color: white;
   position: absolute;
@@ -22,29 +38,41 @@ div.tooltip {
 
 <h1>Target Field 2019 Hits</h1>
 <p>Every time a ball was hit in Target Field in 2019, with
-Batter+Pitcher data and outcome.</p>
+Batter+Pitcher data and outcome. Colors correspond to exit velocity:
+light blue is softly hit, dark blue is hard hit.</p>
+<p>Note: some Pitchers may not be recorded currently. Updates to follow...
+</p>
 <div class="chart"></div>
 
 <script>
+
+// resizing: https://chartio.com/resources/tutorials/how-to-resize-an-svg-when-the-window-is-resized-in-d3-js/
+
 //'xpos','ypos','date','batter','pitcher','exitvel','exitangle','event'
 d3.csv("targetfield.csv").then( function(data){
 console.log(data[0]);
-data.forEach( function(d) {
-        d['xpos'] = +d['xpos'];
+//data.forEach( function(d) {
+  //      d['xpos'] = +d['xpos'];
 //d.ypos = +d.ypos;
 //d.date = +d.date;
         //d.g = +d.g;
        // //We also want to calculate the strikeouts per game and store it as a new column
 //  d.kpg = d.so / d.g;
 //console.log(d.date);
-    });
-   console.log(data.xpos);
+  //  });
+// console.log(data.xpos);
+
+var newData = data.filter(filterCriteria);
+
+function filterCriteria(d) { return d.exitvel >= 45 }
 
 
 var svg = d3.select(".chart")
-        .append("svg")
-        .attr("width", 900)
-.attr("height", 500);
+.append("svg")
+.attr("viewBox", "0 0 1000 600")
+.attr("preserveAspectRatio", "xMinYMin meet")
+       // .attr("width", 700)
+//.attr("height", 300);
 
 var margin = {top: 50, right: 50, bottom: 50, left: 50}
   , width = window.innerWidth - margin.left - margin.right // Use the window's width 
@@ -87,23 +115,27 @@ var yValue = function(d) { return d.ypos;}, // data -> value
     yMap = function(d) { return yScale(yValue(d));}, // data -> display
 yAxis = d3.axisLeft(yScale);
 
+var colorScale = d3.scaleSequential(d3.interpolateBlues).domain([40,120]);
+
 
 
   // draw dots
   svg.selectAll(".dot")
-.data(data)
+//.data(data)
+.data(newData)
     .enter().append("circle")
       .attr("class", "dot")
       .attr("r", 3.5)
       .attr("cx", xMap)
       .attr("cy", yMap)
-      //.style("fill", function(d) { return color(cValue(d));}) 
+.style("fill", function(d) { return colorScale(d['exitvel']); })
+
 .on("mouseover", function(d) {
 tooltip.transition()
                .duration(200)
                .style("opacity", .9);
 tooltip
-.html(d['batter'] +"vs"+d['pitcher'] + "<br/>" +d['date']+", "+d['exitvel'] +"MPH, "+d['event'])
+.html(d['batter'] +"vs"+d['pitcher'] + "<br/>" +d['date']+", "+d['exitangle'] +"deg, "+d['event'])
                .style("left", (d3.event.pageX + 5) + "px")
                .style("top", (d3.event.pageY - 28) + "px");
       })
@@ -117,5 +149,5 @@ tooltip
 
 <hr>
 <address></address>
-<!-- hhmts start -->Last modified: Mon Aug 26 15:31:18 BST 2019 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Tue Aug 27 14:38:03 BST 2019 <!-- hhmts end -->
 </body> </html>
