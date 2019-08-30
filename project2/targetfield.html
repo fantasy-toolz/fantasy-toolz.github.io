@@ -42,12 +42,14 @@ Batter+Pitcher data and outcome. Colors correspond to exit velocity:
 light blue is softly hit, dark blue is hard hit.</p>
 <p>Note: some Pitchers may not be recorded currently. Updates to follow...
 </p>
-    <div class="col-sm-2"><p id="value-simple"></p></div>
-    <div class="col-sm"><div id="slider-simple"></div></div>
+    <div><p id="value-simple"></p></div>
+    <div><div id="slider-simple"></div></div>
 
 <div class="chart"></div>
 
 <script>
+
+// sliders: https://bl.ocks.org/johnwalley/e1d256b81e51da68f7feb632a53c3518
 
 // resizing: https://chartio.com/resources/tutorials/how-to-resize-an-svg-when-the-window-is-resized-in-d3-js/
 
@@ -66,7 +68,7 @@ var ymax = 0;
 var zmin = 1000;
 var zmax = 0;
 
-console.log(data[0]);
+//console.log(data[0]);
 data.forEach( function(d) {
 
 // go through data and find the min/max of relevant quantities
@@ -80,7 +82,7 @@ if ((parseFloat(d.exitvel) > zmax) && (!isNaN(d.exitvel))) { zmax=parseFloat(d.e
 if ((parseFloat(d.exitvel) < zmin) && (!isNaN(d.exitvel))) { zmin=parseFloat(d.exitvel)}
 
     });
- console.log(xmin,xmax,ymin,ymax,zmin,zmax);
+ //console.log(xmin,xmax,ymin,ymax,zmin,zmax);
 
 
 
@@ -123,7 +125,7 @@ function filterCriteria(d) { return d.exitvel >= sliderSimple.value()}
 
 //console.log(d3.max(data.xpos)))
 
-console.log(data["xpos"])
+//console.log(data["xpos"])
 
 var svg = d3.select(".chart")
 .append("svg")
@@ -246,5 +248,5 @@ tooltip
 
 <hr>
 <address></address>
-<!-- hhmts start -->Last modified: Fri Aug 30 16:11:26 BST 2019 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Fri Aug 30 16:49:00 BST 2019 <!-- hhmts end -->
 </body> </html>
