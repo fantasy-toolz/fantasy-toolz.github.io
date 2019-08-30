@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Target Field, 2019</title>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+
+</head>
+
+<body>
+<style>
+
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 10%;
+    vertical-align: top;
+    overflow: hidden;
+}
+.svg-content {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+div.tooltip {
+  color: white;
+  position: absolute;
+  text-align: center;
+  width: 300px;
+  height: 28px;
+  padding: 2px;
+  font: 12px sans-serif;
+  background: rgba(0,0,0,.8);
+  border: 2px solid black;
+  pointer-events: none;
+}</style>
+
+<h1>Scatter Template</h1>
+<p>Take an (x,y) scatter diagram, with (z) colors and (a) annotations.</p>
+
+<div class="chart"></div>
+
+<script>
+
+// resizing: https://chartio.com/resources/tutorials/how-to-resize-an-svg-when-the-window-is-resized-in-d3-js/
+
+d3.csv("input.csv").then( function(data){
+
+// compute limits
+
+
+var newData = data.filter(filterCriteria);
+
+function filterCriteria(d) { return d.exitvel >= 45 }
+
+
+var svg = d3.select(".chart")
+.append("svg")
+.attr("viewBox", "0 0 1000 600")
+.attr("preserveAspectRatio", "xMinYMin meet")
+       // .attr("width", 700)
+//.attr("height", 300);
+
+var margin = {top: 50, right: 50, bottom: 50, left: 50}
+  , width = window.innerWidth - margin.left - margin.right // Use the window's width 
+  , height = window.innerHeight - margin.top - margin.bottom; // Use the window's height
+
+
+var xScale = d3.scaleLinear()
+      .domain([0,250])
+      .range([0, width]);
+
+var yScale = d3.scaleLinear()
+      .domain([-220, 0])
+.range([height,0]);
+
+// 3. Call the x axis in a group tag
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(xScale)); // Create an axis component with d3.axisBottom
+
+// 4. Call the y axis in a group tag
+svg.append("g")
+    .attr("class", "y axis")
+    .call(d3.axisLeft(yScale)); // Create an axis component with d3.axisLeft
+
+
+const tooltip = d3.select("body").append("div")
+    .attr("class", "tooltip")
+.style("opacity", 0);
+
+// setup x 
+var xValue = function(d) { return d.x;}, // data -> value
+    xScale = d3.scaleLinear().domain([0,250]).range([0, width]), // value -> display
+    xMap = function(d) { return xScale(xValue(d));}, // data -> display
+    xAxis = d3.axisBottom(xScale);
+
+// setup y
+var yValue = function(d) { return d.y;}, // data -> value
+    yScale = d3.scaleLinear().domain([-220,0]).range([height, 0]), // value -> display
+    yMap = function(d) { return yScale(yValue(d));}, // data -> display
+yAxis = d3.axisLeft(yScale);
+
+var colorScale = d3.scaleSequential(d3.interpolateBlues).domain([40,120]);
+
+
+
+  // draw dots
+  svg.selectAll(".dot")
+//.data(data)
+.data(newData)
+    .enter().append("circle")
+      .attr("class", "dot")
+      .attr("r", 3.5)
+      .attr("cx", xMap)
+      .attr("cy", yMap)
+.style("fill", function(d) { return colorScale(d['exitvel']); })
+
+.on("mouseover", function(d) {
+tooltip.transition()
+               .duration(200)
+               .style("opacity", .9);
+tooltip
+.html(d['batter'] +"vs"+d['pitcher'] + "<br/>" +d['date']+", "+d['exitangle'] +"deg, "+d['event'])
+               .style("left", (d3.event.pageX + 5) + "px")
+               .style("top", (d3.event.pageY - 28) + "px");
+      })
+      .on("mouseout", function(d) {
+          tooltip.transition()
+               .duration(500)
+               .style("opacity", 0);
+      });
+});
+</script>
+
+<hr>
+<address></address>
+<!-- hhmts start -->Last modified: Fri Aug 30 10:49:51 BST 2019 <!-- hhmts end -->
+</body> </html>

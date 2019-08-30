@@ -2,7 +2,7 @@
 <html> <head>
 <title>Target Field, 2019</title>
 <script src="https://d3js.org/d3.v5.min.js"></script>
-
+<script src="https://unpkg.com/d3-simple-slider"></script>
 </head>
 
 <body>
@@ -42,6 +42,9 @@ Batter+Pitcher data and outcome. Colors correspond to exit velocity:
 light blue is softly hit, dark blue is hard hit.</p>
 <p>Note: some Pitchers may not be recorded currently. Updates to follow...
 </p>
+    <div class="col-sm-2"><p id="value-simple"></p></div>
+    <div class="col-sm"><div id="slider-simple"></div></div>
+
 <div class="chart"></div>
 
 <script>
@@ -50,22 +53,77 @@ light blue is softly hit, dark blue is hard hit.</p>
 
 //'xpos','ypos','date','batter','pitcher','exitvel','exitangle','event'
 d3.csv("targetfield.csv").then( function(data){
+
+// csv should be in format with xpos,ypos,zpos,annot
+
+//console.log(data[0].xpos)
+//console.log(Math.min.apply(Math,data["xpos"]));
+
+var xmin = 1000;
+var xmax = 0;
+var ymin = 1000;
+var ymax = 0;
+var zmin = 1000;
+var zmax = 0;
+
 console.log(data[0]);
-//data.forEach( function(d) {
-  //      d['xpos'] = +d['xpos'];
-//d.ypos = +d.ypos;
-//d.date = +d.date;
-        //d.g = +d.g;
-       // //We also want to calculate the strikeouts per game and store it as a new column
-//  d.kpg = d.so / d.g;
-//console.log(d.date);
-  //  });
-// console.log(data.xpos);
+data.forEach( function(d) {
+
+// go through data and find the min/max of relevant quantities
+if ((parseFloat(d.xpos) > xmax) && (!isNaN(d.xpos))) { xmax=parseFloat(d.xpos)}
+if ((parseFloat(d.xpos) < xmin) && (!isNaN(d.xpos))) { xmin=parseFloat(d.xpos)}
+
+if ((parseFloat(d.ypos) > ymax) && (!isNaN(d.ypos))) { ymax=parseFloat(d.ypos)}
+if ((parseFloat(d.ypos) < ymin) && (!isNaN(d.ypos))) { ymin=parseFloat(d.ypos)}
+
+if ((parseFloat(d.exitvel) > zmax) && (!isNaN(d.exitvel))) { zmax=parseFloat(d.exitvel)}
+if ((parseFloat(d.exitvel) < zmin) && (!isNaN(d.exitvel))) { zmin=parseFloat(d.exitvel)}
+
+    });
+ console.log(xmin,xmax,ymin,ymax,zmin,zmax);
+
+
+
+
+  var slidervals = [0,30,60,90,120];
+
+  var sliderSimple = d3
+    .sliderBottom()
+    .min(d3.min(slidervals))
+    .max(d3.max(slidervals))
+    .width(300)
+    .tickFormat(d3.format('3.3'))
+    .ticks(5)
+    .default(90)
+    .on('onchange', val => {
+d3.select('p#value-simple').text('Exit Velocity >'+d3.format('3.3')(val) +'MPH');
+//console.log('updating data');
+updateData();
+    });
+
+  var gSimple = d3
+    .select('div#slider-simple')
+    .append('svg')
+    .attr('width', 500)
+    .attr('height', 100)
+    .append('g')
+    .attr('transform', 'translate(30,30)');
+
+  gSimple.call(sliderSimple);
+
+  d3.select('p#value-simple').text('Exit Velocity >'+d3.format('3.3')(sliderSimple.value())+'MPH');
 
 var newData = data.filter(filterCriteria);
 
-function filterCriteria(d) { return d.exitvel >= 45 }
 
+
+function filterCriteria(d) { return d.exitvel >= sliderSimple.value()}
+
+
+
+//console.log(d3.max(data.xpos)))
+
+console.log(data["xpos"])
 
 var svg = d3.select(".chart")
 .append("svg")
@@ -80,11 +138,11 @@ var margin = {top: 50, right: 50, bottom: 50, left: 50}
 
 
 var xScale = d3.scaleLinear()
-      .domain([0,250])
+      .domain([xmin,xmax])
       .range([0, width]);
 
 var yScale = d3.scaleLinear()
-      .domain([-220, 0])
+      .domain([ymin, ymax])
 .range([height,0]);
 
 // 3. Call the x axis in a group tag
@@ -105,17 +163,17 @@ const tooltip = d3.select("body").append("div")
 
 // setup x 
 var xValue = function(d) { return d.xpos;}, // data -> value
-    xScale = d3.scaleLinear().domain([0,250]).range([0, width]), // value -> display
+    xScale = d3.scaleLinear().domain([xmin,xmax]).range([0, width]), // value -> display
     xMap = function(d) { return xScale(xValue(d));}, // data -> display
     xAxis = d3.axisBottom(xScale);
 
 // setup y
 var yValue = function(d) { return d.ypos;}, // data -> value
-    yScale = d3.scaleLinear().domain([-220,0]).range([height, 0]), // value -> display
+    yScale = d3.scaleLinear().domain([ymin,ymax]).range([height, 0]), // value -> display
     yMap = function(d) { return yScale(yValue(d));}, // data -> display
 yAxis = d3.axisLeft(yScale);
 
-var colorScale = d3.scaleSequential(d3.interpolateBlues).domain([40,120]);
+var colorScale = d3.scaleSequential(d3.interpolateBlues).domain([sliderSimple.value(),zmax]);
 
 
 
@@ -125,7 +183,43 @@ var colorScale = d3.scaleSequential(d3.interpolateBlues).domain([40,120]);
 .data(newData)
     .enter().append("circle")
       .attr("class", "dot")
-      .attr("r", 3.5)
+      .attr("r", 2)
+      .attr("cx", xMap)
+      .attr("cy", yMap)
+.style("fill", function(d) { return colorScale(d['exitvel']); })
+
+.on("mouseover", function(d) {
+tooltip.transition()
+               .duration(200)
+               .style("opacity", .9);
+tooltip
+.html(d['batter'] +"vs"+d['pitcher'] + "<br/>" +d['date']+", "+d['exitangle'] +"deg, "+d['event'])
+               .style("left", (d3.event.pageX + 5) + "px")
+               .style("top", (d3.event.pageY - 28) + "px");
+      })
+      .on("mouseout", function(d) {
+          tooltip.transition()
+               .duration(500)
+.style("opacity", 0);
+
+
+
+});
+
+function updateData() {
+
+svg.selectAll(".dot").remove()
+
+var newData = data.filter(filterCriteria);
+
+var colorScale = d3.scaleSequential(d3.interpolateBlues).domain([sliderSimple.value(),zmax]);
+
+
+  svg.selectAll(".dot")
+.data(newData)
+    .enter().append("circle")
+      .attr("class", "dot")
+      .attr("r", 2)
       .attr("cx", xMap)
       .attr("cy", yMap)
 .style("fill", function(d) { return colorScale(d['exitvel']); })
@@ -143,11 +237,14 @@ tooltip
           tooltip.transition()
                .duration(500)
                .style("opacity", 0);
-      });
+      });}
+
+
+
 });
 </script>
 
 <hr>
 <address></address>
-<!-- hhmts start -->Last modified: Tue Aug 27 14:38:03 BST 2019 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Fri Aug 30 16:11:26 BST 2019 <!-- hhmts end -->
 </body> </html>
