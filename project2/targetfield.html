@@ -42,8 +42,8 @@ Batter+Pitcher data and outcome. Colors correspond to exit velocity:
 light blue is softly hit, dark blue is hard hit.</p>
 <p>Note: some Pitchers may not be recorded currently. Updates to follow...
 </p>
-    <div><p id="value-simple"></p></div>
-    <div><div id="slider-simple"></div></div>
+    <div><p id="value-range"></p></div>
+    <div><div id="slider-range"></div></div>
 
 <div class="chart"></div>
 
@@ -87,39 +87,49 @@ if ((parseFloat(d.exitvel) < zmin) && (!isNaN(d.exitvel))) { zmin=parseFloat(d.e
 
 
 
-  var slidervals = [0,30,60,90,120];
+var slidervals = [0,30,60,90,120];
 
-  var sliderSimple = d3
+var sliderRange = d3
     .sliderBottom()
     .min(d3.min(slidervals))
     .max(d3.max(slidervals))
     .width(300)
     .tickFormat(d3.format('3.3'))
     .ticks(5)
-    .default(90)
+    .default([0, 120])
+    .fill('#2196f3')
     .on('onchange', val => {
-d3.select('p#value-simple').text('Exit Velocity >'+d3.format('3.3')(val) +'MPH');
-//console.log('updating data');
+d3.select('p#value-range').text('Exit velocity in range:'+val.map(d3.format('3.3')).join('-') +'MPH');
 updateData();
     });
 
-  var gSimple = d3
-    .select('div#slider-simple')
+  var gRange = d3
+    .select('div#slider-range')
     .append('svg')
     .attr('width', 500)
     .attr('height', 100)
     .append('g')
     .attr('transform', 'translate(30,30)');
 
-  gSimple.call(sliderSimple);
+  gRange.call(sliderRange);
 
-  d3.select('p#value-simple').text('Exit Velocity >'+d3.format('3.3')(sliderSimple.value())+'MPH');
+  d3.select('p#value-range').text('Exit velocity in range:'+
+    sliderRange
+      .value()
+      .map(d3.format('3.3'))
+      .join('-')+'MPH'
+);
+
+console.log(sliderRange.value())
 
 var newData = data.filter(filterCriteria);
 
 
 
-function filterCriteria(d) { return d.exitvel >= sliderSimple.value()}
+function filterCriteria(d) {
+return (d.exitvel >=sliderRange.value()[0]) && (d.exitvel <=sliderRange.value()[1])
+
+}
 
 
 
@@ -175,8 +185,8 @@ var yValue = function(d) { return d.ypos;}, // data -> value
     yMap = function(d) { return yScale(yValue(d));}, // data -> display
 yAxis = d3.axisLeft(yScale);
 
-var colorScale = d3.scaleSequential(d3.interpolateBlues).domain([sliderSimple.value(),zmax]);
-
+//var colorScale = d3.scaleSequential(d3.interpolateBlues).domain([sliderRange.value()[0], sliderRange.value()[1]]);
+var colorScale = d3.scaleSequential(d3.interpolateBlues).domain([zmin,zmax]);
 
 
   // draw dots
@@ -214,8 +224,8 @@ svg.selectAll(".dot").remove()
 
 var newData = data.filter(filterCriteria);
 
-var colorScale = d3.scaleSequential(d3.interpolateBlues).domain([sliderSimple.value(),zmax]);
-
+//var colorScale = d3.scaleSequential(d3.interpolateBlues).domain([sliderRange.value()[0], sliderRange.value()[1]]);
+var colorScale = d3.scaleSequential(d3.interpolateBlues).domain([zmin,zmax]);
 
   svg.selectAll(".dot")
 .data(newData)
@@ -248,5 +258,5 @@ tooltip
 
 <hr>
 <address></address>
-<!-- hhmts start -->Last modified: Fri Aug 30 16:49:00 BST 2019 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Fri Aug 30 17:04:27 BST 2019 <!-- hhmts end -->
 </body> </html>
