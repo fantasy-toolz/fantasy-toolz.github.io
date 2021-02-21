@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!-https://stackoverflow.com/questions/14267781/sorting-html-table-with-javascript-->
+<meta charset="utf-8">
+<head>
+<title>2021 Fantasy Toolz Predictions</title>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+</head>
+
+
+
+<style>
+body {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 14px;
+  color: #333;
+}
+text {
+	fill: #555;
+}
+.inner text {
+	text-anchor: middle;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+th {
+    cursor: pointer;
+}
+</style>
+
+
+<body>
+
+<h2>How the rankings work</h2>
+
+<p> The guiding principle is to use the data from previous years to guide the projections for the current year. We operate on normalised rates, i.e. the probability of a given outcome for each plate appearance, \(P( {H,R,RBI,HR,SB} | PA)\). </p>
+
+<!-- *************************************** -->
+<h3> Cluster assignment </h3>
+
+<p>We use a k-means clustering algorithm to determine player archetypes.</p>
+
+<p>Example. distribution in R vs. RBI space. </p>
+
+<h4> Criteria for assignment </h4>
+<p>Players must have more than 100 PA in a season for the cluster to be assigned. </p>
+
+<h4> Number of clusters </h4>
+<p>We perform a cluster stability analysis by increasing the number of clusters until new clusters are only opened in uninteresting locations of parameter space (e.g. very good or very bad). </p>
+
+<!-- *************************************** -->
+<h3> Player predictions </h3>
+<p>The primary product we provide is a most-probable rate for each cluster statistic. Every players starts as a weighted mean of the centroids of each cluster they have been assigned to, which is then modified for the particular player. As each player has a rate that does not match the centroid, we adjust the estimate based on the distance from the center of the cluster. </p>
+
+<h4> Assigning weights per year </h4>
+
+<p>One needs to decide how to mix the contributions from previous years. We select weights
+
+The subscript denotes the year relative to the current year: \(\omega_{current\ year - previous\ year}\). We choose \(\omega_{1}=0.50,\ \omega_{2}=0.30,\ \omega_{2}=0.13,\ \omega_{4}=0.07\). Assigning weights for each year is currently a dark art, and we should think of a verification procedure. </p>
+
+<p> Example. The year is 2021. If we had chosen \(\omega_{1}=0.5\) and \(\omega_{2}=0.5\), 50% of the inference for 2021 comes from the previous year (2020) and 50% of the inference for 2021 comes from the year before that (2019). </p>
+
+<h4> Assigning the 'stickiness' of the clusters </h4>
+<p> Each player's rates for a given year are regressed back toward the center of the cluster. Choosing the regression factor is not well-determined. </p>
+
+<p> Example. Anthony Rendon is assigned to a 2019 cluster with \(\langle R\rangle=0.12\). In 2019, Rendon actually achieved \(R=0.14\). With an assigned regression factor of \(\alpha=0.5\), Rendon's true predicted 2019 was \(\langle R\rangle+\alpha\cdot (R-\langle R\rangle) = (1-\alpha)\cdot \langle R\rangle + \alpha\cdot R = 0.13\). This number is used in the weighted average. </p>
+
+<!-- *************************************** -->
+<h3> Uncertainty bands </h3>
+
+<p> Given how far the individual point is from the centre of a cluster, we make estimates for how </p>
+
+<p> The key assumption is that each player's uncertainty must include the centroid of the cluster to which they have been assigned. </p>
+
+<h4> Centroid regression factors in uncertainty </h4>
+<p>The factor used to regress each year back to the mean is also tuned to create uncertainty estimates. </p>
+<!-- -Information about skewness? -->
+
+<!-- *************************************** -->
+<h3> More corrections </h3>
+<h4> Age penalty </h4>
+<h4> Uncertainty in youth </h4>
+
+</body>
+</html>
