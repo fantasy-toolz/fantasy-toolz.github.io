@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<!-https://stackoverflow.com/questions/14267781/sorting-html-table-with-javascript-->
+<!--https://stackoverflow.com/questions/14267781/sorting-html-table-with-javascript-->
+<!--https://www.w3schools.com/howto/howto_js_filter_table.asp-->
 <meta charset="utf-8">
 <head>
   <title>2021 Fantasy Toolz Predictions</title>
@@ -27,7 +28,31 @@ th {
 </style>
 
 
-<script type="text/javascript">
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td0 = tr[i].getElementsByTagName("td")[0];
+    td1 = tr[i].getElementsByTagName("td")[1];
+    if (td0 || td1) {
+      txtValue0 = td0.textContent || td0.innerText;
+      txtValue1 = td1.textContent || td1.innerText;
+ 
+      if (txtValue0.toUpperCase().indexOf(filter) > -1 || txtValue1.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+
+<script>
 window.onload=function(){ 
 const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
 
@@ -63,7 +88,9 @@ document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() =
 <p> Pitching Key: IP=innings pitched, SO = strikeouts, ERA= earned run
 average, WHIP= walks+hits per inning pitched, W=wins, S=saves</p>
 
-<table>
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search player or team..." title="Type in a name">
+
+<table id="myTable">
 <tr><th>Name</th><th>Team</th><th>Age</th><th>Pos</th><th>PA</th><th>AVG</th><th>HR</th><th>R</th><th>RBI</th><th>SB</th><th>IP</th><th>SO</th><th>ERA</th><th>WHIP</th><th>W</th><th>S</th><th>Value</th><th>Rank</th></tr>
 <tr><td> Mookie Betts  </td><td> Dodgers </td><td> 28 </td><td> RF </td><td> 679 </td><td> 0.293 </td><td> 35 </td><td> 124 </td><td> 95 </td><td> 22 </td><td> 0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td> 2318 </td><td> 1 </td></tr>
 <tr><td> Juan Soto  </td><td> Nationals </td><td> 22 </td><td> LF </td><td> 665 </td><td> 0.308 </td><td> 35 </td><td> 109 </td><td> 105 </td><td> 12 </td><td> 0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td> 2315 </td><td> 2 </td></tr>
