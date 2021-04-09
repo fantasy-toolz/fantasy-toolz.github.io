@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>2020 Lineups</title>
+    <title>2021 Lineups</title>
     <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8">
     <!--https://www.w3schools.com/css/css_table.asp-->
@@ -9,402 +9,39 @@
 
   <body>
   <h2>Batting Order Breakdown</h2>
-  <p>For each team, what is the 'typical' 2020 lineup, and how
-  frequently was each player in said lineup spot?</p>
-  <p>Frequency is currently computed as (appearances at
-  position)/(total team games). One could also use (appearances at position)/(total appearances)?</p>
-
-<br><h3><a href="figures/2020LAAorder.png"> LAA </a></h3>
+  <p>For each team, what is the "typical" 2021 lineup?</p>
 <table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Fletcher, David </td><td> 80.0 </td></tr>
-<tr><td> 2 </td><td> Walsh, Jared </td><td> 26.7 </td></tr>
-<tr><td> 3 </td><td> Trout, Mike </td><td> 61.7 </td></tr>
-<tr><td> 4 </td><td> Rendon, Anthony </td><td> 60.0 </td></tr>
-<tr><td> 5 </td><td> Ohtani, Shohei </td><td> 33.3 </td></tr>
-<tr><td> 6 </td><td> Pujols, Albert </td><td> 25.0 </td></tr>
-<tr><td> 7 </td><td> Adell, Jo </td><td> 31.7 </td></tr>
-<tr><td> 8 </td><td> Stassi, Max </td><td> 26.7 </td></tr>
-<tr><td> 9 </td><td> Rengifo, Luis </td><td> 33.3 </td></tr>
+<tr><th>Team</th><th>1st</th><th>2nd</th><th>3rd</th><th>4th</th><th>5th</th><th>6th</th><th>7th</th><th>8th</th><th>9th</th><th>Similarity</th><th>First Appeared</th></tr>
+<tr><td><a href="figures/2021LAAorder.png">LAA</a></td><td>Fletcher, David</td><td>Ohtani, Shohei</td><td>Trout, Mike</td><td>Rendon, Anthony</td><td>Walsh, Jared</td><td>Upton, Justin</td><td>Iglesias, José</td><td>Suzuki, Kurt</td><td>Fowler, Dexter</td><td>5.29</td><td>3</td></tr>
+<tr><td><a href="figures/2021HOUorder.png">HOU</a></td><td>Altuve, Jose</td><td>Brantley, Michael</td><td>Bregman, Alex</td><td>Tucker, Kyle</td><td>Correa, Carlos</td><td>Alvarez, Yordan</td><td>Gurriel, Yuli</td><td>Straw, Myles</td><td>Maldonado, Martín</td><td>4.43</td><td>1</td></tr>
+<tr><td><a href="figures/2021OAKorder.png">OAK</a></td><td>Canha, Mark</td><td>Olson, Matt</td><td>Lowrie, Jed</td><td>Moreland, Mitch</td><td>Chapman, Matt</td><td>Piscotty, Stephen</td><td>Tom, Ka'ai</td><td>Andrus, Elvis</td><td>Garcia, Aramis</td><td>2.81</td><td>4</td></tr>
+<tr><td><a href="figures/2021TORorder.png">TOR</a></td><td>Semien, Marcus</td><td>Biggio, Cavan</td><td>Bichette, Bo</td><td>Hernández, Teoscar</td><td>Guerrero Jr., Vladimir</td><td>Gurriel Jr., Lourdes</td><td>Grichuk, Randal</td><td>Panik, Joe</td><td>Jansen, Danny</td><td>6.0</td><td>6</td></tr>
+<tr><td><a href="figures/2021ATLorder.png">ATL</a></td><td>Acuña Jr., Ronald</td><td>Albies, Ozzie</td><td>Freeman, Freddie</td><td>Ozuna, Marcell</td><td>d'Arnaud, Travis</td><td>Swanson, Dansby</td><td>Riley, Austin</td><td>Pache, Cristian</td><td>Fried, Max</td><td>5.33</td><td>1</td></tr>
+<tr><td><a href="figures/2021MILorder.png">MIL</a></td><td>Wong, Kolten</td><td>Hiura, Keston</td><td>Yelich, Christian</td><td>García, Avisaíl</td><td>Bradley Jr., Jackie</td><td>Urías, Luis</td><td>Narváez, Omar</td><td>Arcia, Orlando</td><td>Anderson, Brett</td><td>3.86</td><td>4</td></tr>
+<tr><td><a href="figures/2021STLorder.png">STL</a></td><td>Edman, Tommy</td><td>Goldschmidt, Paul</td><td>Arenado, Nolan</td><td>DeJong, Paul</td><td>O'Neill, Tyler</td><td>Molina, Yadier</td><td>Carlson, Dylan</td><td>Williams, Justin</td><td>Flaherty, Jack</td><td>4.86</td><td>1</td></tr>
+<tr><td><a href="figures/2021CHCorder.png">CHC</a></td><td>Happ, Ian</td><td>Contreras, Willson</td><td>Rizzo, Anthony</td><td>Bryant, Kris</td><td>Pederson, Joc</td><td>Báez, Javier</td><td>Heyward, Jason</td><td>Bote, David</td><td>Hendricks, Kyle</td><td>3.71</td><td>1</td></tr>
+<tr><td><a href="figures/2021ARIorder.png">ARI</a></td><td>Rojas, Josh</td><td>Marte, Ketel</td><td>Walker, Christian</td><td>Peralta, David</td><td>Cabrera, Asdrúbal</td><td>Escobar, Eduardo</td><td>Kelly, Carson</td><td>Locastro, Tim</td><td>Bumgarner, Madison</td><td>3.86</td><td>6</td></tr>
+<tr><td><a href="figures/2021LADorder.png">LAD</a></td><td>Betts, Mookie</td><td>Seager, Corey</td><td>Turner, Justin</td><td>Bellinger, Cody</td><td>Muncy, Max</td><td>Taylor, Chris</td><td>Lux, Gavin</td><td>Barnes, Austin</td><td>Kershaw, Clayton</td><td>2.86</td><td>1</td></tr>
+<tr><td><a href="figures/2021SForder.png">SF</a></td><td>Slater, Austin</td><td>Yastrzemski, Mike</td><td>Solano, Donovan</td><td>Longoria, Evan</td><td>Ruf, Darin</td><td>Flores, Wilmer</td><td>Posey, Buster</td><td>Crawford, Brandon</td><td>Dubón, Mauricio</td><td>2.0</td><td>2</td></tr>
+<tr><td><a href="figures/2021CLEorder.png">CLE</a></td><td>Luplow, Jordan</td><td>Hernandez, Cesar</td><td>Ramírez, José</td><td>Rosario, Eddie</td><td>Reyes, Franmil</td><td>Naylor, Josh</td><td>Chang, Yu</td><td>Pérez, Roberto</td><td>Giménez, Andrés</td><td>5.0</td><td>1</td></tr>
+<tr><td><a href="figures/2021SEAorder.png">SEA</a></td><td>Haniger, Mitch</td><td>France, Ty</td><td>Seager, Kyle</td><td>White, Evan</td><td>Trammell, Taylor</td><td>Moore, Dylan</td><td>Fraley, Jake</td><td>Torrens, Luis</td><td>Crawford, J.P.</td><td>5.29</td><td>2</td></tr>
+<tr><td><a href="figures/2021MIAorder.png">MIA</a></td><td>Dickerson, Corey</td><td>Marte, Starling</td><td>Aguilar, Jesús</td><td>Duvall, Adam</td><td>Anderson, Brian</td><td>Chisholm Jr., Jazz</td><td>Alfaro, Jorge</td><td>Rojas, Miguel</td><td>Alcantara, Sandy</td><td>3.14</td><td>1</td></tr>
+<tr><td><a href="figures/2021NYMorder.png">NYM</a></td><td>Nimmo, Brandon</td><td>Lindor, Francisco</td><td>Conforto, Michael</td><td>Alonso, Pete</td><td>Smith, Dominic</td><td>Villar, Jonathan</td><td>McNeil, Jeff</td><td>McCann, James</td><td>Walker, Taijuan</td><td>3.75</td><td>4</td></tr>
+<tr><td><a href="figures/2021WSHorder.png">WSH</a></td><td>Robles, Victor</td><td>Turner, Trea</td><td>Soto, Juan</td><td>Zimmerman, Ryan</td><td>Castro, Starlin</td><td>Pérez, Hernán</td><td>Stevenson, Andrew</td><td>Lucroy, Jonathan</td><td>Scherzer, Max</td><td>4.0</td><td>1</td></tr>
+<tr><td><a href="figures/2021BALorder.png">BAL</a></td><td>Mullins, Cedric</td><td>Mancini, Trey</td><td>Santander, Anthony</td><td>Mountcastle, Ryan</td><td>Ruiz, Rio</td><td>Hays, Austin</td><td>Franco, Maikel</td><td>Galvis, Freddy</td><td>Severino, Pedro</td><td>4.29</td><td>1</td></tr>
+<tr><td><a href="figures/2021SDorder.png">SD</a></td><td>Pham, Tommy</td><td>Tatis Jr., Fernando</td><td>Machado, Manny</td><td>Hosmer, Eric</td><td>Myers, Wil</td><td>Cronenworth, Jake</td><td>Profar, Jurickson</td><td>Caratini, Victor</td><td>Darvish, Yu</td><td>2.57</td><td>1</td></tr>
+<tr><td><a href="figures/2021PHIorder.png">PHI</a></td><td>McCutchen, Andrew</td><td>Hoskins, Rhys</td><td>Harper, Bryce</td><td>Realmuto, J.T.</td><td>Bohm, Alec</td><td>Gregorius, Didi</td><td>Segura, Jean</td><td>Haseley, Adam</td><td>Nola, Aaron</td><td>4.67</td><td>1</td></tr>
+<tr><td><a href="figures/2021PITorder.png">PIT</a></td><td>Frazier, Adam</td><td>Newman, Kevin</td><td>Reynolds, Bryan</td><td>Moran, Colin</td><td>Evans, Phillip</td><td>Polanco, Gregory</td><td>Stallings, Jacob</td><td>Fowler, Dustin</td><td>Anderson, Tyler</td><td>3.71</td><td>7</td></tr>
+<tr><td><a href="figures/2021TEXorder.png">TEX</a></td><td>Kiner-Falefa, Isiah</td><td>Dahl, David</td><td>Gallo, Joey</td><td>Solak, Nick</td><td>Lowe, Nate</td><td>Trevino, Jose</td><td>White, Eli</td><td>Taveras, Leody</td><td>Culberson, Charlie</td><td>4.08</td><td>6</td></tr>
+<tr><td><a href="figures/2021TBorder.png">TB</a></td><td>Tsutsugo, Yoshi</td><td>Meadows, Austin</td><td>Arozarena, Randy</td><td>Lowe, Brandon</td><td>Díaz, Yandy</td><td>Wendle, Joey</td><td>Margot, Manuel</td><td>Mejía, Francisco</td><td>Yarbrough, Ryan</td><td>2.58</td><td>2</td></tr>
+<tr><td><a href="figures/2021BOSorder.png">BOS</a></td><td>Hernández, Enrique</td><td>Verdugo, Alex</td><td>Martinez, J.D.</td><td>Bogaerts, Xander</td><td>Devers, Rafael</td><td>Renfroe, Hunter</td><td>Gonzalez, Marwin</td><td>Vázquez, Christian</td><td>Dalbec, Bobby</td><td>3.43</td><td>1</td></tr>
+<tr><td><a href="figures/2021CINorder.png">CIN</a></td><td>Naquin, Tyler</td><td>Castellanos, Nick</td><td>Votto, Joey</td><td>Suárez, Eugenio</td><td>Moustakas, Mike</td><td>Senzel, Nick</td><td>India, Jonathan</td><td>Barnhart, Tucker</td><td>De León, José</td><td>4.75</td><td>4</td></tr>
+<tr><td><a href="figures/2021COLorder.png">COL</a></td><td>Tapia, Raimel</td><td>Hampson, Garrett</td><td>Story, Trevor</td><td>Blackmon, Charlie</td><td>Cron, C.J.</td><td>McMahon, Ryan</td><td>Hilliard, Sam</td><td>Nuñez, Dom</td><td>Márquez, Germán</td><td>3.14</td><td>5</td></tr>
+<tr><td><a href="figures/2021KCorder.png">KC</a></td><td>Merrifield, Whit</td><td>Benintendi, Andrew</td><td>Santana, Carlos</td><td>Perez, Salvador</td><td>Soler, Jorge</td><td>Dozier, Hunter</td><td>Isbel, Kyle</td><td>Taylor, Michael A.</td><td>Lopez, Nicky</td><td>6.25</td><td>1</td></tr>
+<tr><td><a href="figures/2021DETorder.png">DET</a></td><td>Grossman, Robbie</td><td>Candelario, Jeimer</td><td>Castro, Willi</td><td>Cabrera, Miguel</td><td>Schoop, Jonathan</td><td>Mazara, Nomar</td><td>Ramos, Wilson</td><td>Goodrum, Niko</td><td>Jones, JaCoby</td><td>2.67</td><td>2</td></tr>
+<tr><td><a href="figures/2021MINorder.png">MIN</a></td><td>Arraez, Luis</td><td>Polanco, Jorge</td><td>Buxton, Byron</td><td>Kepler, Max</td><td>Sanó, Miguel</td><td>Cave, Jake</td><td>Garver, Mitch</td><td>Simmons, Andrelton</td><td>Pineda, Michael</td><td>2.57</td><td>3</td></tr>
+<tr><td><a href="figures/2021CWSorder.png">CWS</a></td><td>Anderson, Tim</td><td>Eaton, Adam</td><td>Abreu, José</td><td>Moncada, Yoán</td><td>Mercedes, Yermín</td><td>Grandal, Yasmani</td><td>Robert, Luis</td><td>Hamilton, Billy</td><td>Madrigal, Nick</td><td>2.94</td><td>4</td></tr>
+<tr><td><a href="figures/2021NYYorder.png">NYY</a></td><td>LeMahieu, DJ</td><td>Judge, Aaron</td><td>Hicks, Aaron</td><td>Stanton, Giancarlo</td><td>Torres, Gleyber</td><td>Bruce, Jay</td><td>Sánchez, Gary</td><td>Urshela, Gio</td><td>Frazier, Clint</td><td>3.75</td><td>2</td></tr>
 </table>
-<br><h3><a href="figures/2020HOUorder.png"> HOU </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Springer, George </td><td> 81.7 </td></tr>
-<tr><td> 2 </td><td> Altuve, Jose </td><td> 66.7 </td></tr>
-<tr><td> 3 </td><td> Brantley, Michael </td><td> 46.7 </td></tr>
-<tr><td> 4 </td><td> Gurriel, Yuli </td><td> 36.7 </td></tr>
-<tr><td> 5 </td><td> Tucker, Kyle </td><td> 43.3 </td></tr>
-<tr><td> 6 </td><td> Correa, Carlos </td><td> 51.7 </td></tr>
-<tr><td> 7 </td><td> Reddick, Josh </td><td> 38.3 </td></tr>
-<tr><td> 8 </td><td> Reddick, Josh </td><td> 20.0 </td></tr>
-<tr><td> 9 </td><td> Maldonado, Martín </td><td> 55.0 </td></tr>
-</table>
-<br><h3><a href="figures/2020OAKorder.png"> OAK </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Semien, Marcus </td><td> 65.0 </td></tr>
-<tr><td> 2 </td><td> Laureano, Ramón </td><td> 46.7 </td></tr>
-<tr><td> 3 </td><td> Chapman, Matt </td><td> 31.7 </td></tr>
-<tr><td> 4 </td><td> Olson, Matt </td><td> 45.0 </td></tr>
-<tr><td> 5 </td><td> Canha, Mark </td><td> 48.3 </td></tr>
-<tr><td> 6 </td><td> Grossman, Robbie </td><td> 40.0 </td></tr>
-<tr><td> 7 </td><td> Piscotty, Stephen </td><td> 38.3 </td></tr>
-<tr><td> 8 </td><td> Kemp, Tony </td><td> 20.0 </td></tr>
-<tr><td> 9 </td><td> Murphy, Sean </td><td> 43.3 </td></tr>
-</table>
-<br><h3><a href="figures/2020TORorder.png"> TOR </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Biggio, Cavan </td><td> 76.7 </td></tr>
-<tr><td> 2 </td><td> Grichuk, Randal </td><td> 41.7 </td></tr>
-<tr><td> 3 </td><td> Shaw, Travis </td><td> 30.0 </td></tr>
-<tr><td> 4 </td><td> Hernández, Teoscar </td><td> 43.3 </td></tr>
-<tr><td> 5 </td><td> Guerrero Jr., Vladimir </td><td> 33.3 </td></tr>
-<tr><td> 6 </td><td> Gurriel Jr., Lourdes </td><td> 23.3 </td></tr>
-<tr><td> 7 </td><td> Panik, Joe </td><td> 21.7 </td></tr>
-<tr><td> 8 </td><td> Panik, Joe </td><td> 20.0 </td></tr>
-<tr><td> 9 </td><td> Jansen, Danny </td><td> 30.0 </td></tr>
-</table>
-<br><h3><a href="figures/2020ATLorder.png"> ATL </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Acuña Jr., Ronald </td><td> 76.7 </td></tr>
-<tr><td> 2 </td><td> Freeman, Freddie </td><td> 43.3 </td></tr>
-<tr><td> 3 </td><td> Freeman, Freddie </td><td> 53.3 </td></tr>
-<tr><td> 4 </td><td> Ozuna, Marcell </td><td> 60.0 </td></tr>
-<tr><td> 5 </td><td> d'Arnaud, Travis </td><td> 21.7 </td></tr>
-<tr><td> 6 </td><td> Riley, Austin </td><td> 25.0 </td></tr>
-<tr><td> 7 </td><td> Duvall, Adam </td><td> 28.3 </td></tr>
-<tr><td> 8 </td><td> Riley, Austin </td><td> 33.3 </td></tr>
-<tr><td> 9 </td><td> Inciarte, Ender </td><td> 40.0 </td></tr>
-</table>
-<br><h3><a href="figures/2020MILorder.png"> MIL </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> García, Avisaíl </td><td> 43.3 </td></tr>
-<tr><td> 2 </td><td> Yelich, Christian </td><td> 58.3 </td></tr>
-<tr><td> 3 </td><td> Yelich, Christian </td><td> 38.3 </td></tr>
-<tr><td> 4 </td><td> Gyorko, Jedd </td><td> 26.7 </td></tr>
-<tr><td> 5 </td><td> Hiura, Keston </td><td> 20.0 </td></tr>
-<tr><td> 6 </td><td> Narváez, Omar </td><td> 16.7 </td></tr>
-<tr><td> 7 </td><td> Arcia, Orlando </td><td> 21.7 </td></tr>
-<tr><td> 8 </td><td> Urías, Luis </td><td> 21.7 </td></tr>
-<tr><td> 9 </td><td> Arcia, Orlando </td><td> 31.7 </td></tr>
-</table>
-<br><h3><a href="figures/2020STLorder.png"> STL </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Wong, Kolten </td><td> 78.3 </td></tr>
-<tr><td> 2 </td><td> Edman, Tommy </td><td> 71.7 </td></tr>
-<tr><td> 3 </td><td> Goldschmidt, Paul </td><td> 96.7 </td></tr>
-<tr><td> 4 </td><td> Miller, Brad </td><td> 48.3 </td></tr>
-<tr><td> 5 </td><td> DeJong, Paul </td><td> 31.7 </td></tr>
-<tr><td> 6 </td><td> Molina, Yadier </td><td> 40.0 </td></tr>
-<tr><td> 7 </td><td> Carpenter, Matt </td><td> 28.3 </td></tr>
-<tr><td> 8 </td><td> O'Neill, Tyler </td><td> 21.7 </td></tr>
-<tr><td> 9 </td><td> Bader, Harrison </td><td> 50.0 </td></tr>
-</table>
-<br><h3><a href="figures/2020CHCorder.png"> CHC </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Happ, Ian </td><td> 61.7 </td></tr>
-<tr><td> 2 </td><td> Rizzo, Anthony </td><td> 63.3 </td></tr>
-<tr><td> 3 </td><td> Báez, Javier </td><td> 53.3 </td></tr>
-<tr><td> 4 </td><td> Schwarber, Kyle </td><td> 55.0 </td></tr>
-<tr><td> 5 </td><td> Contreras, Willson </td><td> 43.3 </td></tr>
-<tr><td> 6 </td><td> Heyward, Jason </td><td> 46.7 </td></tr>
-<tr><td> 7 </td><td> Heyward, Jason </td><td> 25.0 </td></tr>
-<tr><td> 8 </td><td> Kipnis, Jason </td><td> 25.0 </td></tr>
-<tr><td> 9 </td><td> Hoerner, Nico </td><td> 33.3 </td></tr>
-</table>
-<br><h3><a href="figures/2020ARIorder.png"> ARI </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Calhoun, Kole </td><td> 28.3 </td></tr>
-<tr><td> 2 </td><td> Marte, Ketel </td><td> 48.3 </td></tr>
-<tr><td> 3 </td><td> Marte, Starling </td><td> 53.3 </td></tr>
-<tr><td> 4 </td><td> Peralta, David </td><td> 35.0 </td></tr>
-<tr><td> 5 </td><td> Walker, Christian </td><td> 36.7 </td></tr>
-<tr><td> 6 </td><td> Peralta, David </td><td> 30.0 </td></tr>
-<tr><td> 7 </td><td> Ahmed, Nick </td><td> 38.3 </td></tr>
-<tr><td> 8 </td><td> Varsho, Daulton </td><td> 23.3 </td></tr>
-<tr><td> 9 </td><td> Ahmed, Nick </td><td> 33.3 </td></tr>
-</table>
-<br><h3><a href="figures/2020LADorder.png"> LAD </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Betts, Mookie </td><td> 70.0 </td></tr>
-<tr><td> 2 </td><td> Seager, Corey </td><td> 65.0 </td></tr>
-<tr><td> 3 </td><td> Turner, Justin </td><td> 51.7 </td></tr>
-<tr><td> 4 </td><td> Bellinger, Cody </td><td> 48.3 </td></tr>
-<tr><td> 5 </td><td> Taylor, Chris </td><td> 18.3 </td></tr>
-<tr><td> 6 </td><td> Taylor, Chris </td><td> 25.0 </td></tr>
-<tr><td> 7 </td><td> Taylor, Chris </td><td> 21.7 </td></tr>
-<tr><td> 8 </td><td> Hernández, Enrique </td><td> 25.0 </td></tr>
-<tr><td> 9 </td><td> Barnes, Austin </td><td> 41.7 </td></tr>
-</table>
-<br><h3><a href="figures/2020SForder.png"> SF </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Yastrzemski, Mike </td><td> 63.3 </td></tr>
-<tr><td> 2 </td><td> Dickerson, Alex </td><td> 50.0 </td></tr>
-<tr><td> 3 </td><td> Solano, Donovan </td><td> 36.7 </td></tr>
-<tr><td> 4 </td><td> Belt, Brandon </td><td> 50.0 </td></tr>
-<tr><td> 5 </td><td> Longoria, Evan </td><td> 31.7 </td></tr>
-<tr><td> 6 </td><td> Longoria, Evan </td><td> 18.3 </td></tr>
-<tr><td> 7 </td><td> Crawford, Brandon </td><td> 43.3 </td></tr>
-<tr><td> 8 </td><td> Bart, Joey </td><td> 28.3 </td></tr>
-<tr><td> 9 </td><td> Dubón, Mauricio </td><td> 46.7 </td></tr>
-</table>
-<br><h3><a href="figures/2020CLEorder.png"> CLE </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Hernandez, Cesar </td><td> 71.7 </td></tr>
-<tr><td> 2 </td><td> Ramírez, José </td><td> 70.0 </td></tr>
-<tr><td> 3 </td><td> Lindor, Francisco </td><td> 73.3 </td></tr>
-<tr><td> 4 </td><td> Santana, Carlos </td><td> 100.0 </td></tr>
-<tr><td> 5 </td><td> Reyes, Franmil </td><td> 95.0 </td></tr>
-<tr><td> 6 </td><td> Naquin, Tyler </td><td> 50.0 </td></tr>
-<tr><td> 7 </td><td> Santana, Domingo </td><td> 28.3 </td></tr>
-<tr><td> 8 </td><td> Pérez, Roberto </td><td> 38.3 </td></tr>
-<tr><td> 9 </td><td> DeShields, Delino </td><td> 50.0 </td></tr>
-</table>
-<br><h3><a href="figures/2020SEAorder.png"> SEA </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Crawford, J.P. </td><td> 80.0 </td></tr>
-<tr><td> 2 </td><td> Moore, Dylan </td><td> 43.3 </td></tr>
-<tr><td> 3 </td><td> Lewis, Kyle </td><td> 86.7 </td></tr>
-<tr><td> 4 </td><td> Seager, Kyle </td><td> 85.0 </td></tr>
-<tr><td> 5 </td><td> Nola, Austin </td><td> 36.7 </td></tr>
-<tr><td> 6 </td><td> Marmolejos, José </td><td> 28.3 </td></tr>
-<tr><td> 7 </td><td> Lopes, Tim </td><td> 23.3 </td></tr>
-<tr><td> 8 </td><td> Long Jr., Shed </td><td> 15.0 </td></tr>
-<tr><td> 9 </td><td> Strange-Gordon, Dee </td><td> 18.3 </td></tr>
-</table>
-<br><h3><a href="figures/2020MIAorder.png"> MIA </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Villar, Jonathan </td><td> 36.7 </td></tr>
-<tr><td> 2 </td><td> Marte, Starling </td><td> 45.0 </td></tr>
-<tr><td> 3 </td><td> Aguilar, Jesús </td><td> 43.3 </td></tr>
-<tr><td> 4 </td><td> Joyce, Matt </td><td> 30.0 </td></tr>
-<tr><td> 5 </td><td> Anderson, Brian </td><td> 61.7 </td></tr>
-<tr><td> 6 </td><td> Cooper, Garrett </td><td> 18.3 </td></tr>
-<tr><td> 7 </td><td> Rojas, Miguel </td><td> 25.0 </td></tr>
-<tr><td> 8 </td><td> Chisholm, Jazz </td><td> 11.7 </td></tr>
-<tr><td> 9 </td><td> Alfaro, Jorge </td><td> 20.0 </td></tr>
-</table>
-<br><h3><a href="figures/2020NYMorder.png"> NYM </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Nimmo, Brandon </td><td> 68.3 </td></tr>
-<tr><td> 2 </td><td> Conforto, Michael </td><td> 38.3 </td></tr>
-<tr><td> 3 </td><td> Davis, J.D. </td><td> 38.3 </td></tr>
-<tr><td> 4 </td><td> Smith, Dominic </td><td> 35.0 </td></tr>
-<tr><td> 5 </td><td> Canó, Robinson </td><td> 51.7 </td></tr>
-<tr><td> 6 </td><td> Alonso, Pete </td><td> 36.7 </td></tr>
-<tr><td> 7 </td><td> McNeil, Jeff </td><td> 23.3 </td></tr>
-<tr><td> 8 </td><td> Giménez, Andrés </td><td> 26.7 </td></tr>
-<tr><td> 9 </td><td> Rosario, Amed </td><td> 21.7 </td></tr>
-</table>
-<br><h3><a href="figures/2020WSHorder.png"> WSH </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Turner, Trea </td><td> 66.7 </td></tr>
-<tr><td> 2 </td><td> Eaton, Adam </td><td> 46.7 </td></tr>
-<tr><td> 3 </td><td> Soto, Juan </td><td> 33.3 </td></tr>
-<tr><td> 4 </td><td> Cabrera, Asdrúbal </td><td> 41.7 </td></tr>
-<tr><td> 5 </td><td> Suzuki, Kurt </td><td> 18.3 </td></tr>
-<tr><td> 6 </td><td> Gomes, Yan </td><td> 16.7 </td></tr>
-<tr><td> 7 </td><td> Kieboom, Carter </td><td> 28.3 </td></tr>
-<tr><td> 8 </td><td> García, Luis </td><td> 18.3 </td></tr>
-<tr><td> 9 </td><td> Robles, Victor </td><td> 58.3 </td></tr>
-</table>
-<br><h3><a href="figures/2020BALorder.png"> BAL </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Alberto, Hanser </td><td> 51.7 </td></tr>
-<tr><td> 2 </td><td> Santander, Anthony </td><td> 53.3 </td></tr>
-<tr><td> 3 </td><td> Iglesias, José </td><td> 35.0 </td></tr>
-<tr><td> 4 </td><td> Núñez, Renato </td><td> 33.3 </td></tr>
-<tr><td> 5 </td><td> Severino, Pedro </td><td> 28.3 </td></tr>
-<tr><td> 6 </td><td> Stewart, DJ </td><td> 13.3 </td></tr>
-<tr><td> 7 </td><td> Valaika, Pat </td><td> 23.3 </td></tr>
-<tr><td> 8 </td><td> Ruiz, Rio </td><td> 20.0 </td></tr>
-<tr><td> 9 </td><td> Mullins, Cedric </td><td> 31.7 </td></tr>
-</table>
-<br><h3><a href="figures/2020SDorder.png"> SD </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Grisham, Trent </td><td> 48.3 </td></tr>
-<tr><td> 2 </td><td> Tatis Jr., Fernando </td><td> 46.7 </td></tr>
-<tr><td> 3 </td><td> Machado, Manny </td><td> 68.3 </td></tr>
-<tr><td> 4 </td><td> Hosmer, Eric </td><td> 36.7 </td></tr>
-<tr><td> 5 </td><td> Myers, Wil </td><td> 28.3 </td></tr>
-<tr><td> 6 </td><td> Myers, Wil </td><td> 51.7 </td></tr>
-<tr><td> 7 </td><td> Cronenworth, Jake </td><td> 30.0 </td></tr>
-<tr><td> 8 </td><td> Profar, Jurickson </td><td> 23.3 </td></tr>
-<tr><td> 9 </td><td> Profar, Jurickson </td><td> 30.0 </td></tr>
-</table>
-<br><h3><a href="figures/2020PHIorder.png"> PHI </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> McCutchen, Andrew </td><td> 86.7 </td></tr>
-<tr><td> 2 </td><td> Hoskins, Rhys </td><td> 68.3 </td></tr>
-<tr><td> 3 </td><td> Harper, Bryce </td><td> 80.0 </td></tr>
-<tr><td> 4 </td><td> Realmuto, J.T. </td><td> 71.7 </td></tr>
-<tr><td> 5 </td><td> Segura, Jean </td><td> 41.7 </td></tr>
-<tr><td> 6 </td><td> Segura, Jean </td><td> 36.7 </td></tr>
-<tr><td> 7 </td><td> Bruce, Jay </td><td> 26.7 </td></tr>
-<tr><td> 8 </td><td> Kingery, Scott </td><td> 25.0 </td></tr>
-<tr><td> 9 </td><td> Quinn, Roman </td><td> 36.7 </td></tr>
-</table>
-<br><h3><a href="figures/2020PITorder.png"> PIT </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Frazier, Adam </td><td> 45.0 </td></tr>
-<tr><td> 2 </td><td> Newman, Kevin </td><td> 31.7 </td></tr>
-<tr><td> 3 </td><td> Bell, Josh </td><td> 33.3 </td></tr>
-<tr><td> 4 </td><td> Moran, Colin </td><td> 53.3 </td></tr>
-<tr><td> 5 </td><td> Reynolds, Bryan </td><td> 40.0 </td></tr>
-<tr><td> 6 </td><td> Polanco, Gregory </td><td> 31.7 </td></tr>
-<tr><td> 7 </td><td> González, Erik </td><td> 18.3 </td></tr>
-<tr><td> 8 </td><td> Stallings, Jacob </td><td> 16.7 </td></tr>
-<tr><td> 9 </td><td> Stallings, Jacob </td><td> 33.3 </td></tr>
-</table>
-<br><h3><a href="figures/2020TEXorder.png"> TEX </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Taveras, Leody </td><td> 43.3 </td></tr>
-<tr><td> 2 </td><td> Kiner-Falefa, Isiah </td><td> 33.3 </td></tr>
-<tr><td> 3 </td><td> Kiner-Falefa, Isiah </td><td> 20.0 </td></tr>
-<tr><td> 4 </td><td> Gallo, Joey </td><td> 81.7 </td></tr>
-<tr><td> 5 </td><td> Solak, Nick </td><td> 23.3 </td></tr>
-<tr><td> 6 </td><td> Odor, Rougned </td><td> 26.7 </td></tr>
-<tr><td> 7 </td><td> Guzmán, Ronald </td><td> 16.7 </td></tr>
-<tr><td> 8 </td><td> Guzmán, Ronald </td><td> 18.3 </td></tr>
-<tr><td> 9 </td><td> Mathis, Jeff </td><td> 33.3 </td></tr>
-</table>
-<br><h3><a href="figures/2020TBorder.png"> TB </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Meadows, Austin </td><td> 36.7 </td></tr>
-<tr><td> 2 </td><td> Lowe, Brandon </td><td> 60.0 </td></tr>
-<tr><td> 3 </td><td> Díaz, Yandy </td><td> 31.7 </td></tr>
-<tr><td> 4 </td><td> Choi, Ji-Man </td><td> 33.3 </td></tr>
-<tr><td> 5 </td><td> Adames, Willy </td><td> 23.3 </td></tr>
-<tr><td> 6 </td><td> Wendle, Joey </td><td> 25.0 </td></tr>
-<tr><td> 7 </td><td> Adames, Willy </td><td> 26.7 </td></tr>
-<tr><td> 8 </td><td> Kiermaier, Kevin </td><td> 35.0 </td></tr>
-<tr><td> 9 </td><td> Perez, Michael </td><td> 43.3 </td></tr>
-</table>
-<br><h3><a href="figures/2020BOSorder.png"> BOS </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Verdugo, Alex </td><td> 55.0 </td></tr>
-<tr><td> 2 </td><td> Devers, Rafael </td><td> 70.0 </td></tr>
-<tr><td> 3 </td><td> Martinez, J.D. </td><td> 45.0 </td></tr>
-<tr><td> 4 </td><td> Bogaerts, Xander </td><td> 55.0 </td></tr>
-<tr><td> 5 </td><td> Vázquez, Christian </td><td> 35.0 </td></tr>
-<tr><td> 6 </td><td> Vázquez, Christian </td><td> 28.3 </td></tr>
-<tr><td> 7 </td><td> Chavis, Michael </td><td> 20.0 </td></tr>
-<tr><td> 8 </td><td> Bradley Jr., Jackie </td><td> 40.0 </td></tr>
-<tr><td> 9 </td><td> Peraza, José </td><td> 36.7 </td></tr>
-</table>
-<br><h3><a href="figures/2020CINorder.png"> CIN </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Akiyama, Shogo </td><td> 46.7 </td></tr>
-<tr><td> 2 </td><td> Castellanos, Nick </td><td> 83.3 </td></tr>
-<tr><td> 3 </td><td> Votto, Joey </td><td> 40.0 </td></tr>
-<tr><td> 4 </td><td> Suárez, Eugenio </td><td> 75.0 </td></tr>
-<tr><td> 5 </td><td> Moustakas, Mike </td><td> 60.0 </td></tr>
-<tr><td> 6 </td><td> Winker, Jesse </td><td> 18.3 </td></tr>
-<tr><td> 7 </td><td> Galvis, Freddy </td><td> 21.7 </td></tr>
-<tr><td> 8 </td><td> Galvis, Freddy </td><td> 40.0 </td></tr>
-<tr><td> 9 </td><td> Barnhart, Tucker </td><td> 48.3 </td></tr>
-</table>
-<br><h3><a href="figures/2020COLorder.png"> COL </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Tapia, Raimel </td><td> 58.3 </td></tr>
-<tr><td> 2 </td><td> Story, Trevor </td><td> 81.7 </td></tr>
-<tr><td> 3 </td><td> Blackmon, Charlie </td><td> 65.0 </td></tr>
-<tr><td> 4 </td><td> Arenado, Nolan </td><td> 55.0 </td></tr>
-<tr><td> 5 </td><td> Murphy, Daniel </td><td> 41.7 </td></tr>
-<tr><td> 6 </td><td> McMahon, Ryan </td><td> 36.7 </td></tr>
-<tr><td> 7 </td><td> McMahon, Ryan </td><td> 21.7 </td></tr>
-<tr><td> 8 </td><td> Hilliard, Sam </td><td> 33.3 </td></tr>
-<tr><td> 9 </td><td> Wolters, Tony </td><td> 58.3 </td></tr>
-</table>
-<br><h3><a href="figures/2020KCorder.png"> KC </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Merrifield, Whit </td><td> 98.3 </td></tr>
-<tr><td> 2 </td><td> Mondesi, Adalberto </td><td> 35.0 </td></tr>
-<tr><td> 3 </td><td> Perez, Salvador </td><td> 46.7 </td></tr>
-<tr><td> 4 </td><td> Franco, Maikel </td><td> 26.7 </td></tr>
-<tr><td> 5 </td><td> Franco, Maikel </td><td> 30.0 </td></tr>
-<tr><td> 6 </td><td> Gordon, Alex </td><td> 33.3 </td></tr>
-<tr><td> 7 </td><td> Gordon, Alex </td><td> 23.3 </td></tr>
-<tr><td> 8 </td><td> Lopez, Nicky </td><td> 30.0 </td></tr>
-<tr><td> 9 </td><td> Lopez, Nicky </td><td> 36.7 </td></tr>
-</table>
-<br><h3><a href="figures/2020DETorder.png"> DET </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Reyes, Victor </td><td> 56.7 </td></tr>
-<tr><td> 2 </td><td> Schoop, Jonathan </td><td> 55.0 </td></tr>
-<tr><td> 3 </td><td> Cabrera, Miguel </td><td> 93.3 </td></tr>
-<tr><td> 4 </td><td> Candelario, Jeimer </td><td> 48.3 </td></tr>
-<tr><td> 5 </td><td> Goodrum, Niko </td><td> 26.7 </td></tr>
-<tr><td> 6 </td><td> Bonifacio, Jorge </td><td> 23.3 </td></tr>
-<tr><td> 7 </td><td> Stewart, Christin </td><td> 13.3 </td></tr>
-<tr><td> 8 </td><td> Romine, Austin </td><td> 46.7 </td></tr>
-<tr><td> 9 </td><td> Paredes, Isaac </td><td> 33.3 </td></tr>
-</table>
-<br><h3><a href="figures/2020MINorder.png"> MIN </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Kepler, Max </td><td> 56.7 </td></tr>
-<tr><td> 2 </td><td> Donaldson, Josh </td><td> 40.0 </td></tr>
-<tr><td> 3 </td><td> Cruz, Nelson </td><td> 65.0 </td></tr>
-<tr><td> 4 </td><td> Rosario, Eddie </td><td> 48.3 </td></tr>
-<tr><td> 5 </td><td> Sanó, Miguel </td><td> 28.3 </td></tr>
-<tr><td> 6 </td><td> Sanó, Miguel </td><td> 21.7 </td></tr>
-<tr><td> 7 </td><td> Gonzalez, Marwin </td><td> 18.3 </td></tr>
-<tr><td> 8 </td><td> Buxton, Byron </td><td> 21.7 </td></tr>
-<tr><td> 9 </td><td> Jeffers, Ryan </td><td> 30.0 </td></tr>
-</table>
-<br><h3><a href="figures/2020CWSorder.png"> CWS </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> Anderson, Tim </td><td> 81.7 </td></tr>
-<tr><td> 2 </td><td> Moncada, Yoán </td><td> 66.7 </td></tr>
-<tr><td> 3 </td><td> Abreu, José </td><td> 61.7 </td></tr>
-<tr><td> 4 </td><td> Abreu, José </td><td> 38.3 </td></tr>
-<tr><td> 5 </td><td> Jiménez, Eloy </td><td> 40.0 </td></tr>
-<tr><td> 6 </td><td> Robert, Luis </td><td> 25.0 </td></tr>
-<tr><td> 7 </td><td> Robert, Luis </td><td> 51.7 </td></tr>
-<tr><td> 8 </td><td> Mazara, Nomar </td><td> 35.0 </td></tr>
-<tr><td> 9 </td><td> Madrigal, Nick </td><td> 45.0 </td></tr>
-</table>
-<br><h3><a href="figures/2020NYYorder.png"> NYY </a></h3>
-<table id="customers">
-<tr><th> Order </th><th> Player </th><th> Frequency (%) </th></tr>
-<tr><td> 1 </td><td> LeMahieu, DJ </td><td> 78.3 </td></tr>
-<tr><td> 2 </td><td> Voit, Luke </td><td> 50.0 </td></tr>
-<tr><td> 3 </td><td> Hicks, Aaron </td><td> 53.3 </td></tr>
-<tr><td> 4 </td><td> Stanton, Giancarlo </td><td> 31.7 </td></tr>
-<tr><td> 5 </td><td> Torres, Gleyber </td><td> 38.3 </td></tr>
-<tr><td> 6 </td><td> Tauchman, Mike </td><td> 18.3 </td></tr>
-<tr><td> 7 </td><td> Sánchez, Gary </td><td> 28.3 </td></tr>
-<tr><td> 8 </td><td> Sánchez, Gary </td><td> 25.0 </td></tr>
-<tr><td> 9 </td><td> Wade, Tyler </td><td> 43.3 </td></tr>
-</table>
-
-
 </body>
 </html>
