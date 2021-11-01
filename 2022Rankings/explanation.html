@@ -31,7 +31,6 @@ th {
     cursor: pointer;
 }
 .tunable {
-    /* red color */
     color: #d4472a;
 }
 </style>
@@ -107,8 +106,8 @@ th {
 
 <h4> Saves model </h4>
 <h4> Age and injury penalties </h4>
-<p> We modify the yearly weights \(\omega\) based on whether a player is on the wrong side of Father Time, or whether significant absences have occured. In the case where the player is above a certain `pivot age', we revise \(\omega\) for the corresponding years downward (e.g. the player does not get full credit for their statistics) as \(\omega' = \omega-\zeta\), where \(\zeta\) is the penalty value. The penalty is computed as  
-\(\zeta = \alpha_\zeta({\rm age}_{\rm player}-\beta_\zeta) \), where <span class="tunable">\(\alpha_\zeta=0.025\), and the pivot age \(\beta_\zeta=33\)</span>. In the equations above, we replace \(\omega\) with \(\omega'\).
+<p> We modify the yearly weights \(\omega\) based on whether a player is on the wrong side of Father Time, or whether significant absences have occured. In the case where the player is above a certain pivot age, we revise \(\omega\) for the corresponding years downward (e.g. the player does not get full credit for their statistics) as \(\omega_{\rm adjusted} = \omega-\zeta\), where \(\zeta\) is the penalty value. The penalty is computed as  
+\(\zeta = \alpha_\zeta({\rm age}_{\rm player}-\beta_\zeta) \), where <span class="tunable">\(\alpha_\zeta=0.025\), and the pivot age \(\beta_\zeta=33\)</span>. In the equations above, we replace \(\omega\) with \(\omega_{\rm adjusted}\).
 </p>
 
 <p>Example.</p>
