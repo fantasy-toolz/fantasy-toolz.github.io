@@ -1,0 +1,62 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 14px;
+  color: #333;
+}
+text {
+	fill: #555;
+}
+.inner text {
+	text-anchor: middle;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+th {
+    /* https://css-tricks.com/position-sticky-and-table-headers/ */
+    background: white;
+    cursor: pointer;
+    position: sticky;
+    top: 0;
+}
+
+.tunable {
+    color: #d4472a;
+}
+
+.collapsible {
+    background-color: #f1f1f1;
+    color: #000;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+.active, .collapsible:hover {
+    background-color: #eee;
+}
+
+.collapsecontent {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: white;
+    transition: max-height 0.2s ease-out;
+}
+
+.collapsible:after {
+  content: '\02795'; /* Unicode character for "plus" sign (+) */
+  font-size: 13px;
+  color: white;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2796"; /* Unicode character for "minus" sign (-) */
+}

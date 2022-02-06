@@ -1,54 +1,30 @@
 <!DOCTYPE html>
-<!-https://stackoverflow.com/questions/14267781/sorting-html-table-with-javascript-->
+<!-- https://stackoverflow.com/questions/14267781/sorting-html-table-with-javascript -->
 <meta charset="utf-8">
 <head>
-<title>2021 Fantasy Toolz Predictions</title>
+<title>2022 Fantasy Toolz Predictions</title>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
 
-<script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
-</script>
+<link rel="stylesheet" href="projections.css">
+
 </head>
 
-
-
-<style>
-body {
-  font-family: "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 14px;
-  color: #333;
-}
-text {
-	fill: #555;
-}
-.inner text {
-	text-anchor: middle;
-}
-
-table, th, td {
-    border: 1px solid black;
-}
-th {
-    cursor: pointer;
-}
-.tunable {
-    color: #d4472a;
-}
-</style>
 
 
 <body>
 
 <h2>How the rankings work</h2>
 
-<p> The guiding principle is to use the data from previous years to guide the projections for the current year. We operate on normalised rates, i.e. the probability of a given outcome for each plate appearance, \(P( \{H,R,RBI,HR,SB\} | PA)\) for batters and a given outcome per inning pitched, \(P( \{H,BB,SO,W,S\} | IP)\) for pitchers. We start from the assumption that all players fit into a handful of archetypes that broadly define their statistical outputs: home run hitters, contact hitters, stolen base specialists, fireballers, junk pitchers, etc. But instead of defining the players ourselves, we let the data determine the archetypes. Given the archetypes, we can measure how expected or unexpected a given set of statistics is. Crucially, we can also provide uncertainty estimates on our predictions, \(\sigma \left[P\right]\).</p>
+<p> The guiding principle is to use the data from previous years to guide the projections for the current year. We operate on normalised rates, i.e. the probability of a given outcome for each plate appearance, \(P( \{H,R,RBI,HR,SB\} | PA)\) for batters and a given outcome per inning pitched, \(P( \{H,BB,SO,W,S\} | IP)\) for pitchers. We start from the assumption that all players fit into a handful of archetypes that broadly define their statistical outputs: home run hitters, contact hitters, stolen base specialists, fireballers, junk pitchers, etc. But instead of defining the players ourselves, we let the data determine the archetypes. Given the archetypes, we can measure how expected or unexpected a given set of statistics is. Crucially, we can also provide uncertainty estimates on our predictions, \(\sigma \left[P\right]\). All quantities in <span class="tunable">red</span> are quantities that we have tuned.</p>
 
 <!-- *************************************** -->
+<div>
 <h3> 1. Player classification </h3>
 
 <p>We use a k-means clustering algorithm to determine player archetypes in order to classify players in broad categories.</p>
 
 <p>Example. distribution in R vs. RBI space. </p>
-
+</div>
 <h4> Criteria for assignment </h4>
 <p>Batters must have more than <span class="tunable">100 PA</span> in a season for the cluster to be assigned. </p>
 
@@ -106,7 +82,7 @@ th {
 
 <h4> Saves model </h4>
 <h4> Age and injury penalties </h4>
-<p> We modify the yearly weights \(\omega\) based on whether a player is on the wrong side of Father Time, or whether significant absences have occured. In the case where the player is above a certain pivot age, we revise \(\omega\) for the corresponding years downward (e.g. the player does not get full credit for their statistics) as \(\omega_{\rm adjusted} = \omega-\zeta\), where \(\zeta\) is the penalty value. The penalty is computed as  
+<p> We modify the yearly weights \(\omega\) based on whether a player is on the wrong side of Father Time, or whether significant absences have occured. In the case where the player is above a certain pivot age, we revise \(\omega\) for the corresponding years downward (e.g. the player does not get full credit for their statistics) as \(\omega_{\rm adjusted} = \omega-\zeta\), where \(\zeta\) is the penalty value. The penalty is computed as
 \(\zeta = \alpha_\zeta({\rm age}_{\rm player}-\beta_\zeta) \), where <span class="tunable">\(\alpha_\zeta=0.025\), and the pivot age \(\beta_\zeta=33\)</span>. In the equations above, we replace \(\omega\) with \(\omega_{\rm adjusted}\).
 </p>
 
@@ -117,6 +93,25 @@ th {
 
 <h3> Obtaining statistics </h3>
 <p> We are currently deeply indebted to FanGraphs for having such a scrape-able webpage. However, MLB's statcast project is not currently far behind.</p>
+
+
+<script>
+<!--https://www.w3schools.com/howto/howto_js_collapsible.asp-->
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
 
 </body>
 </html>
