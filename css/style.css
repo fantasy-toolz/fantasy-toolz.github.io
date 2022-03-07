@@ -838,7 +838,7 @@
 		input[type="reset"].big,
 		input[type="button"].big,
 		.button.big {
-			font-size: 1em;
+			font-size: 0.75em; /* TEXT SIZE in the buttons */
 			height: 3.5em;
 			line-height: 3.5em;
 			padding: 0 2.25em;
@@ -1231,17 +1231,17 @@
 	#banner {
 		background-attachment: scroll;
 		background-color: #494d53;
-		background-image: url("../figures/toolzbanner.jpg");
+		background-image: url("../images/bbanner2.jpg");
 		background-position: center center;
 		background-repeat:no-repeat;
 		background-size: auto;
 		color: #d1d2d4;
-		padding: 16em 0;
+		padding: 2em 0; /* set the spacing that the text appears from the top */
 		position: relative;
 		text-align: center;
 	}
 
-		#banner:after {
+		#banner:after { /* bring in the background image on load */
 			-moz-transition: opacity 2s ease-in-out;
 			-webkit-transition: opacity 2s ease-in-out;
 			-o-transition: opacity 2s ease-in-out;
@@ -1285,7 +1285,7 @@
 			}
 
 		#banner h2 {
-			font-size: 3.25em;
+			font-size: 2.25em;
 			line-height: 1.25em;
 			margin: 0 0 0.5em 0;
 			padding: 0;
