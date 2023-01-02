@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<!-- https://stackoverflow.com/questions/14267781/sorting-html-table-with-javascript -->
+<meta charset="utf-8">
+<head>
+<title>2023 Fantasy Toolz Predictions</title>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
+
+<link rel="stylesheet" href="projections.css">
+
+</head>
+
+
+
+<body>
+
+<h2>How the rankings work</h2>
+
+<p> The guiding principle is to use the data from previous years to guide the projections for the current year. We operate on normalised rates, i.e. the probability of a given outcome for each plate appearance, \(P( \{H,R,RBI,HR,SB\} | PA)\) for batters and a given outcome per inning pitched, \(P( \{H,BB,SO,W,S\} | IP)\) for pitchers. We start from the assumption that all players fit into a handful of archetypes that broadly define their statistical outputs: home run hitters, contact hitters, stolen base specialists, fireballers, junk pitchers, etc. But instead of defining the players ourselves, we let the data determine the archetypes. Given the archetypes, we can measure how expected or unexpected a given set of statistics is. Crucially, we can also provide uncertainty estimates on our predictions, \(\sigma \left[P\right]\). All quantities in <span class="tunable">red</span> are quantities that we have tuned.</p>
+
+<!-- *************************************** -->
+<div>
+<h3> 1. Player classification </h3>
+
+<p>We use a k-means clustering algorithm to determine player archetypes in order to classify players in broad categories.</p>
+
+<p>Example. distribution in R vs. RBI space. </p>
+</div>
+<h4> Criteria for assignment </h4>
+<p>Batters must have more than <span class="tunable">100 PA</span> in a season for the cluster to be assigned. </p>
+
+<h4> Number of clusters </h4>
+<p>We perform a cluster stability analysis by increasing the number of clusters until new clusters are only opened in uninteresting locations of parameter space (e.g. very good or very bad). Given a set of statistics, define <span class="tunable">\(k\) clusters</span>.</p>
+
+<!-- *************************************** -->
+<h3> Player predictions </h3>
+<p>Parameters to be set. Weights for previous years: \(\omega_{1,\ldots,n}\). Regression factor to archetypes: \(\alpha\). </p>
+
+<p>The primary product we provide is a most-probable rate for each cluster statistic. Every players starts as a weighted mean of the centroids of each cluster they have been assigned to, which is then modified for the particular player. As each player has a rate that does not match the centroid, we adjust the estimate based on the distance from the center of the cluster. </p>
+
+<h4> Assigning weights per year </h4>
+
+<p>One needs to decide how to mix the contributions from previous years. We select weights to define contribution to the predictions from each year. The simplest assumption is that every year counts the same. However, players change from year to year, and are more likely to resemble their recent years rather than historical seasons. The subscript denotes the year relative to the current year: \(\omega_{current\ year - previous\ year}\). For batters, we choose <span class="tunable">\(\omega_{1}=0.50,\ \omega_{2}=0.30,\ \omega_{2}=0.13,\ \omega_{4}=0.07\)</span>. Assigning weights for each year is currently a dark art, and we should think of a verification procedure. </p>
+
+<p> Example. The year is 2021. If we had chosen \(\omega_{1}=0.5\) and \(\omega_{2}=0.5\), 50% of the inference for 2021 comes from the previous year (2020) and 50% of the inference for 2021 comes from the year before that (2019). </p>
+
+<p> For pitchers, we use <span class="tunable">\(\omega_{1}=0.45,\ \omega_{2}=0.30,\ \omega_{2}=0.15,\ \omega_{4}=0.10\)</span>. </p>
+
+<!--<p class="tunable"> The weights can be tuned using previous years of measurements. </p>-->
+
+<h4> Assigning the 'stickiness' of the clusters </h4>
+<p> Each player's rates for a given year are regressed back toward the center of the cluster by a chosen factor \(\alpha\). Choosing the regression factor is not well-determined, and should ideally be fit for using previous years of measurements. We currently use <span class="tunable">\(\alpha=0.8\)</span> for pitchers.</p>
+
+<p> Example. Anthony Rendon is assigned to a 2019 cluster with \(\langle R\rangle_{\rm cluster}=0.12\). In 2019, Rendon actually achieved \(R_{\rm Rendon}=0.14\). With an assigned regression factor of \(\alpha=0.5\), Rendon's true predicted 2019 was \(\langle R\rangle_{\rm cluster}+\alpha\cdot (R_{\rm Rendon}-\langle R\rangle_{\rm cluster}) = (1-\alpha)\cdot \langle R\rangle_{\rm cluster} + \alpha\cdot R_{\rm Rendon} = 0.13\). This number is used in the weighted average. </p>
+
+<h4> Putting it together </h4>
+
+<p> For a given year \(y\), the prediction for each statistic for a given player is given by </p>
+<p> \(P( \{H,R,RBI,HR,SB\} | PA)_{\rm player} = \sum_{i=y-3}^y \omega_i \left[ (1-\alpha)\langle R\rangle_{\rm cluster} + \alpha R^y_{\rm player}\right]\) </p>
+
+<!-- *************************************** -->
+<h3> Uncertainty bands </h3>
+
+<p> Given how far the individual point is from the center of a cluster, we make estimates for the band of likely statistical outcomes given membership in a cluster.</p>
+
+<p> The key assumption is that each player's uncertainty must include the centroid of the cluster to which they have been assigned. </p>
+
+<h4> Centroid regression factors in uncertainty </h4>
+<p>The factor used to regress each year back to the mean is also tuned to create uncertainty estimates. We currently use <span class="tunable">\(\beta=1.5\)</span> for pitchers.</p>
+
+<p> \(\sigma\left[P( \{H,R,RBI,HR,SB\} | PA)_{\rm player}\right] = \sum_{i=y-3}^y \omega_i \beta (R_{\rm player}-\langle R\rangle_{\rm cluster})\).
+</p>
+
+<p> In principle, one can extend the uncertainty estimates beyond the standard deviation (i.e. past the assumption of normal distributions). We are currently testing higher-order moments for inclusion -- primarily skew. This is intended to give a sense of which side of the distribution the player is more likely to end up on.</p>
+<p> \({\rm s}\left[P( \{H,R,RBI,HR,SB\} | PA)_{\rm player}\right] = \sum_{i=y-3}^y \omega_i  \sqrt{\beta (R_{\rm player}-\langle R\rangle_{\rm cluster})^2}\).
+</p>
+<!-- -Information about skewness? -->
+
+<!-- *************************************** -->
+<h3> More corrections </h3>
+<h4> Wins model </h4>
+<p>The wins model is based on the discovery of an empirical relationship between wins and earned runs divided by innings pitched, squared. The empirical relationship is fit as a polynomial (of flexible power), with separate relationships computed for starters (\(>100\)IP) and relievers (\(<100\)IP). The nature of polynomial fit means that certain values can result in spurious values. The uncertainty on the number of wins is computed from the uncertainty in the earned runs of a given pitcher, plus a prefactor.</p>
+
+<h4> Saves model </h4>
+<h4> Age and injury penalties </h4>
+<p> We modify the yearly weights \(\omega\) based on whether a player is on the wrong side of Father Time, or whether significant absences have occured. In the case where the player is above a certain pivot age, we revise \(\omega\) for the corresponding years downward (e.g. the player does not get full credit for their statistics) as \(\omega_{\rm adjusted} = \omega-\zeta\), where \(\zeta\) is the penalty value. The penalty is computed as
+\(\zeta = \alpha_\zeta({\rm age}_{\rm player}-\beta_\zeta) \), where <span class="tunable">\(\alpha_\zeta=0.025\), and the pivot age \(\beta_\zeta=33\)</span>. In the equations above, we replace \(\omega\) with \(\omega_{\rm adjusted}\).
+</p>
+
+<p>Example.</p>
+
+<h4> Uncertainty in youth </h4>
+<p>One place we are struggling currently is predicting early career performance. To some degree, this is expected, as our rankings hinge on prior performance and matching particular archetypes. On the other hand, if we can make an early career estimate of what cluster a player will appear in, we can make worthwhile predictions. One path forward might be comparing minor league statistics for players in a given cluster, to see if we can tease out a relationship there.</p>
+
+<h3> Obtaining statistics </h3>
+<p> We are currently deeply indebted to FanGraphs for having such a scrape-able webpage. However, MLB's statcast project is not currently far behind.</p>
+
+
+<script>
+<!--https://www.w3schools.com/howto/howto_js_collapsible.asp-->
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+
+</body>
+</html>

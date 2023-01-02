@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--https://stackoverflow.com/questions/14267781/sorting-html-table-with-javascript-->
+<!--https://www.w3schools.com/howto/howto_js_filter_table.asp-->
+<meta charset="utf-8">
+<head>
+  <title>2023 Fantasy Toolz Predictions</title>
+</head>
+
+<style>
+body {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 14px;
+  color: #333;
+}
+text {
+	fill: #555;
+}
+.inner text {
+	text-anchor: middle;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+th {
+    cursor: pointer;
+}
+</style>
+
+
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td0 = tr[i].getElementsByTagName("td")[0];
+    td1 = tr[i].getElementsByTagName("td")[1];
+    if (td0 || td1) {
+      txtValue0 = td0.textContent || td0.innerText;
+      txtValue1 = td1.textContent || td1.innerText;
+
+      if (txtValue0.toUpperCase().indexOf(filter) > -1 || txtValue1.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
+
+<script>
+window.onload=function(){
+const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
+
+const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
+    v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
+    )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+
+// do the work...
+document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
+    const table = th.closest('table');
+    Array.from(table.querySelectorAll('tr:nth-child(n+2)'))
+        .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
+        .forEach(tr => table.appendChild(tr) );
+})));
+}
+</script>
+
+
+
+<body>
+
+<h3>2023 MLB Predictions, Version January 2nd, 2022</h3>
+
+<h4> Explanation </h4>
+<p> We now have a <a href="explanation.html">skeleton explanation</a> of the procedure, which will be filled out in coming weeks! </p>
+
+<h4> Rankings </h4>
+<p>Go to: <a href='hitters.html'>Batters</a> <a href='pitchers.html'>Pitchers</a>  </p>
+
+
+<p> Batting Key: PA=plate appearances, AVG = batting average, HR= home runs, R= runs, RBI=runs batted in, eRBI = uncertainty in runs batted in, SB=stolen bases,</p>
+<p> Pitching Key: IP=innings pitched, SO = strikeouts, ERA= earned run
+average, WHIP= walks+hits per inning pitched, W=wins, S=saves</p>
+
+</body>
+</html>
