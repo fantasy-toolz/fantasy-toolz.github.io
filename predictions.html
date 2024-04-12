@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upcoming MLB Game Predictions</title>
+  <link rel="stylesheet" href="css/predictions.css">
+</head>
+<body>
+  <header>
+    <h1>Upcoming MLB Game Predictions</h1>
+  </header>
+  <div>
+    <p>Predictions for the next week of MLB games, updated daily. The predictions are based on the FantasyToolz run differential differential model. This model looks at recent performance of teams. The associated calculations are fully available in the associated <a href="https://github.com/fantasy-toolz/mlb-predictions">GitHub repository</a>. <i>Be warned that at present this model does not take pitching matchups into account.</i></p>
+    <p>The quality of the game is the mean run differential of the two teams. Positive numbers indicate the two teams are <i>on average</i> better than a typical matchup.</p>
+    <p>To track how the predictions have done over the season, see <a href="https://raw.githubusercontent.com/fantasy-toolz/mlb-predictions/main/figures/latest.png">this image</a>.</p>
+    <p><a href="index.html">Back to Toolz main page.</a></p>
+  </div>
+
+  <div class="grid-container" id="gameGrid">
+    <!-- Games will be populated here -->
+  </div>
+
+  <script src="js/predictions2.js"></script>
+</body>
+</html>
