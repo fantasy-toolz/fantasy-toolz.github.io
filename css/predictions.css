@@ -30,3 +30,6 @@ body {
     margin: 0;
   }
   
+  .highlighted-team {
+    background-color: yellow;
+  }
