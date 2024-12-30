@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2024 MLB Lineups</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>MLB Lineups</h1>
+    <div class="filters">
+        <label for="teamFilter">Team:</label>
+        <select id="teamFilter">
+            <option value="All">All</option>
+        </select>
+        
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate">
+        
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate">
+
+        <button id="filterButton">Filter</button>
+    </div>
+    
+    <table id="lineupTable">
+        <thead>
+            <tr>
+                <th data-sort="date">Date</th>
+                <th data-sort="team">Team</th>
+                <th data-sort="leadoff">Leadoff</th>
+                <th data-sort="second">Second</th>
+                <th data-sort="third">Third</th>
+                <th data-sort="cleanup">Cleanup</th>
+                <th data-sort="fifth">Fifth</th>
+                <th data-sort="sixth">Sixth</th>
+                <th data-sort="seventh">Seventh</th>
+                <th data-sort="eighth">Eighth</th>
+                <th data-sort="ninth">Ninth</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be dynamically populated -->
+        </tbody>
+    </table>
+
+    <script src="script.js"></script>
+</body>
+</html>
