@@ -90,10 +90,11 @@ document.addEventListener("DOMContentLoaded", function() {
             gridItem.classList.add('grid-item', dateClass);
             const awaywinProbability = (parseFloat(game['awayteamodds']) * 100).toFixed(1);
             const homewinProbability = (parseFloat(game['hometeamodds']) * 100).toFixed(1);
+            const overunder = (parseFloat(game['homerollingruns']) + parseFloat(game['awayrollingruns'])).toFixed(1);
             gridItem.innerHTML = `
-              <div><strong>Away Team:</strong> ${game.awayteamfull} (${awaywinProbability}%)</div>
-              <div><strong>Home Team:</strong> ${game.hometeamfull} (${homewinProbability}%)</div>
-              <div><strong>Quality:</strong> ${game.meanrundiff}</div>
+              <div>${awaywinProbability}% ${game.awayteamfull}at </div>
+              <div>${homewinProbability}% ${game.hometeamfull}</div>
+              <div><strong>Q</strong> ${game.meanrundiff}, </strong>O/U</strong> ${overunder}%</div>
             `;
             dateDiv.appendChild(gridItem);
           }); //               <div><strong>Date:</strong> ${game.date}</div>
@@ -141,8 +142,8 @@ document.addEventListener("DOMContentLoaded", function() {
            const homewinProbability = (parseFloat(game['hometeamodds']) * 100).toFixed(1);
 
            gridItem.innerHTML = `
-             <div class="${awayhighlightClass}"><strong>Away Team:</strong> <span>${game.awayteamfull}</span> <strong>${game.awayteamscore}</strong> (${awaywinProbability}%)</div>
-             <div class="${homehighlightClass}"><strong>Home Team:</strong> <span>${game.hometeamfull}</span> <strong>${game.hometeamscore}</strong> (${homewinProbability}%)</div>
+             <div class="${awayhighlightClass}"><span>${game.awayteamfull}</span> <strong>${game.awayteamscore}</strong> (${awaywinProbability}%) at</div>
+             <div class="${homehighlightClass}"><span>${game.hometeamfull}</span> <strong>${game.hometeamscore}</strong> (${homewinProbability}%)</div>
            `;
            dateDiv.appendChild(gridItem);
          });
