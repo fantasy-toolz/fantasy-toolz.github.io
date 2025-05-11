@@ -92,9 +92,9 @@ document.addEventListener("DOMContentLoaded", function() {
             const homewinProbability = (parseFloat(game['hometeamodds']) * 100).toFixed(1);
             const overunder = (parseFloat(game['homerollingruns']) + parseFloat(game['awayrollingruns'])).toFixed(1);
             gridItem.innerHTML = `
-              <div>${awaywinProbability}% ${game.awayteamfull}at </div>
-              <div>${homewinProbability}% ${game.hometeamfull}</div>
-              <div><strong>Q</strong> ${game.meanrundiff}, </strong>O/U</strong> ${overunder}%</div>
+              <div><strong>${awaywinProbability}%</strong> ${game.awayteamfull} @ </div>
+              <div><strong>${homewinProbability}%</strong> ${game.hometeamfull}</div>
+              <div>(<strong>Q</strong> ${game.meanrundiff}, <strong>O/U</strong> ${overunder})</div>
             `;
             dateDiv.appendChild(gridItem);
           }); //               <div><strong>Date:</strong> ${game.date}</div>
@@ -142,8 +142,8 @@ document.addEventListener("DOMContentLoaded", function() {
            const homewinProbability = (parseFloat(game['hometeamodds']) * 100).toFixed(1);
 
            gridItem.innerHTML = `
-             <div class="${awayhighlightClass}"><span>${game.awayteamfull}</span> <strong>${game.awayteamscore}</strong> (${awaywinProbability}%) at</div>
-             <div class="${homehighlightClass}"><span>${game.hometeamfull}</span> <strong>${game.hometeamscore}</strong> (${homewinProbability}%)</div>
+             <div class="${awayhighlightClass}"><strong>${game.awayteamscore}</strong> <span>${game.awayteamfull}</span> (${awaywinProbability}%) @</div>
+             <div class="${homehighlightClass}"><strong>${game.hometeamscore}</strong> <span>${game.hometeamfull}</span>  (${homewinProbability}%)</div>
            `;
            dateDiv.appendChild(gridItem);
          });
