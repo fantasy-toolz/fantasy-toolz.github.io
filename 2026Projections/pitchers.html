@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-https://stackoverflow.com/questions/14267781/sorting-html-table-with-javascript-->
+<meta charset="utf-8">
+<head>
+  <title>2026 Fantasy Toolz Pitcher Predictions</title>
+</head>
+
+<style>
+body {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 14px;
+  color: #333;
+}
+text {
+	fill: #555;
+}
+.inner text {
+	text-anchor: middle;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+th {
+    cursor: pointer;
+}
+</style>
+
+
+<script type="text/javascript">
+window.onload=function(){
+const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
+
+const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
+    v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
+    )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+
+// do the work...
+document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
+    const table = th.closest('table');
+    Array.from(table.querySelectorAll('tr:nth-child(n+2)'))
+        .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
+        .forEach(tr => table.appendChild(tr) );
+})));
+}
+</script>
+
+
+
+<body>
+
+<h3>2026 Pitcher Predictions, Version February 11th, 2026</h3>
+<p>Go to: <a href='hitters.html'>Batters</a><!-- <a href='index.html'>Overall</a> --></p>
+<p> Key: IP=innings pitched, SO = strikeouts, eSO = uncertainty in strikeouts, ERA= earned run average, eERA=uncertainty in earned run average, WHIP= walks+hits per inning pitched, eWHIP= uncertainty in walks+hits per inning pitched, W=wins, eW = uncertainty in wins, S=saves, eS=uncertainty in saves, TBF=total batters faced, Rank=overall ranking.</p>
+
+<p> This now features borrowed IPs aggregated from Fantasy Pros, Wins model v1.9, and (still) Saves model v1.0.2023. </p>
+
+
+<div id="table-container">Loading…</div>
+
+<script>
+fetch("https://github.com/fantasy-toolz/mlb-player-predictions/blob/main/predictions/2026/all/pitcher_predictions021126.tbl")
+  .then(response => response.text())
+  .then(html => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+    const table = doc.querySelector("table");
+
+    document.getElementById("table-container").innerHTML =
+      table ? table.outerHTML : "Table not found";
+  })
+  .catch(err => {
+    console.error(err);
+    document.getElementById("table-container").textContent =
+      "Failed to load table";
+  });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--https://stackoverflow.com/questions/14267781/sorting-html-table-with-javascript-->
+<meta charset="utf-8">
+<head>
+  <title>2026 Fantasy Toolz Batter Predictions</title>
+</head>
+
+<link rel="stylesheet" href="projections.css">
+
+
+<script type="text/javascript">
+window.onload=function(){
+const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
+
+const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
+    v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
+    )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+
+// do the work...
+document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
+    const table = th.closest('table');
+    Array.from(table.querySelectorAll('tr:nth-child(n+2)'))
+        .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
+        .forEach(tr => table.appendChild(tr) );
+})));
+}
+</script>
+
+
+
+<body>
+
+<h3>2025 Hitter Predictions, Version February 11th, 2026</h3>
+<p>Go to: <a href='pitchers.html'>Pitchers</a> <!--<a href='index.html'>Overall</a>--> </p>
+
+<p> Key: PA=plate appearances, AVG = batting average, lAVG/hAVG = low/high projections for batting average, HR= home runs, lHR/hHR=low/high projections for home runs, R= runs, lR/hR= low/high projections for runs, RBI=runs batted in, lRBI/hRBI = low/high forecase for runs batted in, SB=stolen bases, lSB/hSB=low/high projections for stolen bases, Rank=overall ROTO ranking.</p>
+
+<p> We now forecast a 'low' and 'high' ranking for each stat instead of a single uncertainty band. Outcomes are for 20-80 per cent outcomes.</p>
+
+<p> PAs are an aggregate of all predictions systems available on FantasyPros (thank you!).</p>
+
+<div id="table-container">Loading…</div>
+
+<script>
+fetch("https://github.com/fantasy-toolz/mlb-player-predictions/blob/main/predictions/2026/all/batter_predictions021126.tbl")
+  .then(response => response.text())
+  .then(html => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+    const table = doc.querySelector("table");
+
+    document.getElementById("table-container").innerHTML =
+      table ? table.outerHTML : "Table not found";
+  })
+  .catch(err => {
+    console.error(err);
+    document.getElementById("table-container").textContent =
+      "Failed to load table";
+  });
+</script>
+
+</body>
+
+</html>

@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const endDateInput = document.getElementById('endDate');
     const filterButton = document.getElementById('filterButton');
 
-    const csvUrl = 'https://raw.githubusercontent.com/fantasy-toolz/batting-order/refs/heads/main/data/Aggregate/2025-all-lineups.csv'; // Replace with your CSV URL
+    const csvUrl = 'https://raw.githubusercontent.com/fantasy-toolz/batting-order/refs/heads/main/data/Aggregate/2025-all-lineups.csv'; 
     let parsedData = [];
 
     // Fetch and parse the CSV
