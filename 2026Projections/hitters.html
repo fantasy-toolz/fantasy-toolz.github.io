@@ -8,25 +8,6 @@
 <link rel="stylesheet" href="projections.css">
 
 
-<script type="text/javascript">
-window.onload=function(){
-const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
-
-const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
-    v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
-    )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
-
-// do the work...
-document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
-    const table = th.closest('table');
-    Array.from(table.querySelectorAll('tr:nth-child(n+2)'))
-        .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
-        .forEach(tr => table.appendChild(tr) );
-})));
-}
-</script>
-
-
 
 <body>
 
@@ -39,26 +20,15 @@ document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() =
 
 <p> PAs are an aggregate of all predictions systems available on FantasyPros (thank you!).</p>
 
-<table id="my-table"></table>
+<script src="table-js.js"></script>
 
 <script>
-fetch("https://raw.githubusercontent.com/fantasy-toolz/mlb-player-predictions/refs/heads/main/predictions/2026/batter_predictions_2026.csv")
-  .then(r => r.text())
-  .then(text => {
-    const rows = text.trim().split("\n").map(r => r.split(","));
-    const table = document.getElementById("my-table");
-
-    rows.forEach((row, i) => {
-      const tr = document.createElement("tr");
-      row.forEach(cell => {
-        const el = document.createElement(i === 0 ? "th" : "td");
-        el.textContent = cell;
-        tr.appendChild(el);
-      });
-      table.appendChild(tr);
-    });
-  });
+buildSortableTable(
+  "my-table",
+  "https://raw.githubusercontent.com/fantasy-toolz/mlb-player-predictions/refs/heads/main/predictions/2026/batter_predictions_2026.csv"
+);
 </script>
+
 
 </body>
 
