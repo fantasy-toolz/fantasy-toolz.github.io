@@ -56,26 +56,26 @@ document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() =
 <p> This now features borrowed IPs aggregated from Fantasy Pros, Wins model v1.9, and (still) Saves model v1.0.2023. </p>
 
 
-<div id="table-container">Loading…</div>
+
+<table id="my-table"></table>
 
 <script>
-fetch("https://raw.githubusercontent.com/fantasy-toolz/mlb-player-predictions/refs/heads/main/predictions/2026/all/pitcher_predictions021126.tbl")
-  .then(response => response.text())
-  .then(html => {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, "text/html");
-    const table = doc.querySelector("table");
+fetch("https://raw.githubusercontent.com/fantasy-toolz/mlb-player-predictions/refs/heads/main/predictions/2026/pitcher_predictions_2026.csv")
+  .then(r => r.text())
+  .then(text => {
+    const rows = text.trim().split("\n").map(r => r.split(","));
+    const table = document.getElementById("my-table");
 
-    document.getElementById("table-container").innerHTML =
-      table ? table.outerHTML : "Table not found";
-  })
-  .catch(err => {
-    console.error(err);
-    document.getElementById("table-container").textContent =
-      "Failed to load table";
+    rows.forEach((row, i) => {
+      const tr = document.createElement("tr");
+      row.forEach(cell => {
+        const el = document.createElement(i === 0 ? "th" : "td");
+        el.textContent = cell;
+        tr.appendChild(el);
+      });
+      table.appendChild(tr);
+    });
   });
 </script>
-
-
 </body>
 </html>
