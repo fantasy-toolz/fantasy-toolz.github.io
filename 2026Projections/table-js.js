@@ -5,22 +5,36 @@ function buildSortableTable(tableId, csvUrl) {
       const rows = text.trim().split("\n").map(r => r.split(","));
       const table = document.getElementById(tableId);
 
-      // Build table
+      // Clear existing content
+      table.innerHTML = "";
+
+      // Create table sections
+      const thead = document.createElement("thead");
+      const tbody = document.createElement("tbody");
+      table.appendChild(thead);
+      table.appendChild(tbody);
+
       rows.forEach((row, i) => {
         const tr = document.createElement("tr");
+
         row.forEach(cell => {
           const el = document.createElement(i === 0 ? "th" : "td");
           el.textContent = cell;
           tr.appendChild(el);
         });
-        table.appendChild(tr);
+
+        if (i === 0) {
+          thead.appendChild(tr);
+        } else {
+          tbody.appendChild(tr);
+        }
       });
 
-      enableSorting(table);
+      enableSorting(table, tbody);
     });
 }
 
-function enableSorting(table) {
+function enableSorting(table, tbody) {
   const getCellValue = (tr, idx) =>
     tr.children[idx].innerText || tr.children[idx].textContent;
 
@@ -35,13 +49,13 @@ function enableSorting(table) {
     return v1.toString().localeCompare(v2);
   };
 
-  table.querySelectorAll("th").forEach((th, idx) => {
+  table.querySelectorAll("thead th").forEach((th, idx) => {
     let asc = true;
 
     th.addEventListener("click", () => {
-      Array.from(table.querySelectorAll("tr:nth-child(n+2)"))
+      Array.from(tbody.querySelectorAll("tr"))
         .sort(comparer(idx, asc))
-        .forEach(tr => table.appendChild(tr));
+        .forEach(tr => tbody.appendChild(tr));
 
       asc = !asc;
     });
