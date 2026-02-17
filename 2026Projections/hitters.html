@@ -1,41 +1,37 @@
 <!DOCTYPE html>
-<!--https://stackoverflow.com/questions/14267781/sorting-html-table-with-javascript-->
-<meta charset="utf-8">
-<head>
-  <title>2026 Fantasy Toolz Batter Predictions</title>
-</head>
+  <meta charset="utf-8">
+  <head>
+    <title>2026 Fantasy Toolz Batter Predictions</title>
+  </head>
 
-<link rel="stylesheet" href="projections.css">
+  <link rel="stylesheet" href="projections.css">
 
+  <body>
 
+    <h3>2026 Hitter Predictions, Version February 17th, 2026</h3>
+    <p>Go to: <a href='pitchers.html'>Pitchers</a> <!--<a href='index.html'>Overall</a>--> </p>
 
-<body>
+    <p>These are our best estimates for the 2026 hitter projections. The confidence score ranges from 0 (low confidence) to 100 (high confidence), based on processing our statistically-meaningful-but-not-helpful uncertainties. The uncertainties themselves can be found on our GitHub page.</p>
 
-<h3>2026 Hitter Predictions, Version February 11th, 2026</h3>
-<p>Go to: <a href='pitchers.html'>Pitchers</a> <!--<a href='index.html'>Overall</a>--> </p>
+    <!--<p> Key: PA=plate appearances, AVG = batting average, lAVG/hAVG = low/high projections for batting average, HR= home runs, lHR/hHR=low/high projections for home runs, R= runs, lR/hR= low/high projections for runs, RBI=runs batted in, lRBI/hRBI = low/high forecase for runs batted in, SB=stolen bases, lSB/hSB=low/high projections for stolen bases, Rank=overall ROTO ranking.</p>-->
 
-<p> Key: PA=plate appearances, AVG = batting average, lAVG/hAVG = low/high projections for batting average, HR= home runs, lHR/hHR=low/high projections for home runs, R= runs, lR/hR= low/high projections for runs, RBI=runs batted in, lRBI/hRBI = low/high forecase for runs batted in, SB=stolen bases, lSB/hSB=low/high projections for stolen bases, Rank=overall ROTO ranking.</p>
+    <!--<p> We now forecast a 'low' and 'high' ranking for each stat instead of a single uncertainty band. Outcomes are for 20-80 per cent outcomes.</p>-->
 
-<!--<p> We now forecast a 'low' and 'high' ranking for each stat instead of a single uncertainty band. Outcomes are for 20-80 per cent outcomes.</p>-->
+    <p> PAs are an aggregate of all predictions systems available on FantasyPros (thank you!).</p>
 
-<p> PAs are an aggregate of all predictions systems available on FantasyPros (thank you!).</p>
+    <script src="table-js.js"></script>
 
+    <script>
+      buildSortableTable(
+        "my-table",
+        "https://raw.githubusercontent.com/fantasy-toolz/mlb-player-predictions/refs/heads/main/predictions/2026/batter_predictions_2026.csv"
+      );
+    </script>
 
-<script src="table-js.js"></script>
+    <div class="table-wrapper">
+      <table id="my-table"></table>
+    </div>
 
-
-
-<script>
-buildSortableTable(
-  "my-table",
-  "https://raw.githubusercontent.com/fantasy-toolz/mlb-player-predictions/refs/heads/main/predictions/2026/batter_predictions_2026.csv"
-);
-</script>
-
-<div class="table-wrapper">
-  <table id="my-table"></table>
-</div>
-
-</body>
+  </body>
 
 </html>

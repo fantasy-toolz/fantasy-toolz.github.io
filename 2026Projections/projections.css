@@ -57,11 +57,27 @@ tbody tr:hover {
     background-color: #e8f2ff;
 }
 
-/* Slightly tighter numeric columns */
-td:not(:first-child),
-th:not(:first-child) {
-    text-align: right;
+/* Make first column wider */
+th:first-child,
+td:first-child {
+    width: 220px;       /* adjust to taste */
+    min-width: 220px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
 }
+
+/* Other columns stay compact */
+th:not(:first-child),
+td:not(:first-child) {
+    width: 80px;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 
 
 /* ============================= */
@@ -90,15 +106,26 @@ th:not(:first-child) {
         font-size: 12px;
     }
 
-    /* Make first column slightly wider */
     th:first-child,
     td:first-child {
-        width: 140px;
+        width: 160px;
+        min-width: 160px;
     }
 
-    /* Slightly reduce numeric columns */
     th:not(:first-child),
     td:not(:first-child) {
-        width: 70px;
+        width: 65px;
+    }
+}
+
+
+
+/* ============================= */
+/* Ultra-Compact Mobile Mode */
+/* ============================= */
+@media (max-width: 600px) {
+    td:nth-child(n+6),
+    th:nth-child(n+6) {
+        display: none;
     }
 }
