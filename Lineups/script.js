@@ -5,10 +5,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const endDateInput = document.getElementById('endDate');
     const filterButton = document.getElementById('filterButton');
 
-    const csvUrl = 'https://raw.githubusercontent.com/fantasy-toolz/batting-order/refs/heads/main/data/Aggregate/2025-all-lineups.csv'; 
+    const csvOptions = {
+        option1: 'https://raw.githubusercontent.com/fantasy-toolz/batting-order/refs/heads/main/data/Aggregate/2025-all-lineups.csv',
+        option2: 'https://raw.githubusercontent.com/fantasy-toolz/batting-order/refs/heads/main/data/Preseason/Aggregate/2026-all-lineups.csv'
+    };
+
+    const toggleButtons = document.querySelectorAll('[data-csv-toggle]');
+    let currentCsv = 'option1';
+    let csvUrl = csvOptions[currentCsv];
     let parsedData = [];
 
-    // Fetch and parse the CSV
+    toggleButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            currentCsv = e.target.dataset.csvToggle;
+            csvUrl = csvOptions[currentCsv];
+            fetchCSV();
+        });
+    });
+
     const fetchCSV = async () => {
         try {
             const response = await fetch(csvUrl);
@@ -17,25 +31,31 @@ document.addEventListener('DOMContentLoaded', () => {
             const csvText = await response.text();
             parsedData = parseCSV(csvText);
 
+            resetFilters();          // clear old filters
             populateFilters();
             populateTable(parsedData);
+
         } catch (error) {
             console.error('Error fetching or parsing the CSV:', error);
         }
     };
 
-    // Parse CSV data
     const parseCSV = (csvText) => {
         const rows = csvText.trim().split('\n');
-        const header = rows.shift(); // Remove and store the header row if needed
+        rows.shift(); // remove header
         
         return rows.map(row => {
             const [date, leadoff, second, third, cleanup, fifth, sixth, seventh, eighth, ninth, team] = row.split(',');
             return { date, team, leadoff, second, third, cleanup, fifth, sixth, seventh, eighth, ninth };
         });
     };
-    
-    // Populate the team filter
+
+    const resetFilters = () => {
+        teamFilter.innerHTML = '<option value="All">All</option>';
+        startDateInput.value = '';
+        endDateInput.value = '';
+    };
+
     const populateFilters = () => {
         const teams = [...new Set(parsedData.map(row => row.team))];
         teams.forEach(team => {
@@ -46,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Populate the table
     const populateTable = (filteredData) => {
         const tbody = table.querySelector('tbody');
         tbody.innerHTML = '';
@@ -70,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Apply filters
     const applyFilters = () => {
         const selectedTeam = teamFilter.value;
         const startDate = startDateInput.value;
@@ -87,6 +105,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     filterButton.addEventListener('click', applyFilters);
 
-    // Fetch and populate the data on load
-    fetchCSV();
+    fetchCSV(); // initial load
 });
