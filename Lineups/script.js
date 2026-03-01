@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const csvOptions = {
         option1: 'https://raw.githubusercontent.com/fantasy-toolz/batting-order/refs/heads/main/data/Aggregate/2025-all-lineups.csv',
-        option2: 'https://raw.githubusercontent.com/fantasy-toolz/batting-order/refs/heads/main/data/Preseason/Aggregate/2026-all-lineups.csv'
+        option2: 'https://raw.githubusercontent.com/fantasy-toolz/batting-order/refs/heads/main/data/Preseason/Aggregate/2026-all-lineups.csv',
+        option3: 'https://raw.githubusercontent.com/fantasy-toolz/batting-order/refs/heads/main/data/Preseason/Aggregate/2025-all-lineups.csv'
     };
 
     const toggleButtons = document.querySelectorAll('[data-csv-toggle]');
