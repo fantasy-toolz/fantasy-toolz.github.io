@@ -30,24 +30,30 @@ function buildSortableTable(tableId, csvUrl) {
         }
       });
 
+      console.log("Row count:", tbody.rows.length);
       enableSorting(table, tbody);
     });
 }
 
 function enableSorting(table, tbody) {
-  const getCellValue = (tr, idx) =>
-    tr.children[idx].innerText || tr.children[idx].textContent;
+  const getCellValue = (tr, idx) => tr.children[idx].textContent;
 
   const comparer = (idx, asc) => (a, b) => {
-    const v1 = getCellValue(asc ? a : b, idx);
-    const v2 = getCellValue(asc ? b : a, idx);
+    const v1 = getCellValue(a, idx);
+    const v2 = getCellValue(b, idx);
 
     const n1 = parseFloat(v1);
     const n2 = parseFloat(v2);
 
-    if (!isNaN(n1) && !isNaN(n2)) return n1 - n2;
+    let result;
 
-    return v1.toString().localeCompare(v2);
+    if (!isNaN(n1) && !isNaN(n2)) {
+      result = n1 - n2;
+    } else {
+      result = v1.localeCompare(v2);
+    }
+
+    return asc ? result : -result;
   };
 
   table.querySelectorAll("thead th").forEach((th, idx) => {
