@@ -2,7 +2,7 @@ function buildSortableTable(tableId, csvUrl) {
   fetch(csvUrl)
     .then(r => r.text())
     .then(text => {
-      const rows = text.trim().split("\n").map(r => r.split(","));
+      const rows = text.trim().split(/\r?\n/).map(r => r.split(","));
       const table = document.getElementById(tableId);
 
       // Clear existing content
