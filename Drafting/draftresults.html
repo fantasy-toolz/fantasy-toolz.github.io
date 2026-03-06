@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+  <meta charset="utf-8">
+  <head>
+    <title>2026 TGFBI Draft Summary</title>
+  </head>
+
+  <link rel="stylesheet" href="projections.css">
+
+  <body>
+
+    <h3>2026 TGFBI Draft Summary</h3>
+    <p>Go to: <a href='../index.html'>Homepage</a> </p>
+
+    <p>This is a summary table of the 2026 TGFBI draft results, updated every two hours.</p>
+    <script src="table-js.js"></script>
+
+    <script>
+      buildSortableTable(
+        "my-table",
+        "tgfbi_adp.csv"
+      );
+    </script>
+
+    <div class="table-wrapper">
+      <table id="my-table"></table>
+    </div>
+
+  </body>
+
+</html>
