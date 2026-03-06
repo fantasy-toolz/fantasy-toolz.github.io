@@ -31,7 +31,7 @@ function buildSortableTable(tableId, csvUrl) {
       });
 
       
-      //enableSorting(table, tbody);
+      enableSorting(table, tbody);
     });
 }
 
