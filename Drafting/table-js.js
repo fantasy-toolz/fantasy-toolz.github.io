@@ -42,9 +42,10 @@ function enableSorting(table, tbody) {
     const v1 = getCellValue(asc ? a : b, idx);
     const v2 = getCellValue(asc ? b : a, idx);
 
-    if (v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2)) {
-      return v1 - v2;
-    }
+    const n1 = parseFloat(v1);
+    const n2 = parseFloat(v2);
+
+    if (!isNaN(n1) && !isNaN(n2)) return n1 - n2;
 
     return v1.toString().localeCompare(v2);
   };
@@ -53,11 +54,11 @@ function enableSorting(table, tbody) {
     let asc = true;
 
     th.addEventListener("click", () => {
-      const rows = Array.from(tbody.querySelectorAll("tr"));
+      const rows = [...tbody.rows];
 
       rows.sort(comparer(idx, asc));
 
-      rows.forEach(tr => tbody.appendChild(tr));
+      tbody.append(...rows);
 
       asc = !asc;
     });
