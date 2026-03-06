@@ -30,7 +30,7 @@ function buildSortableTable(tableId, csvUrl) {
         }
       });
 
-      console.log("Row count:", tbody.rows.length);
+      
       enableSorting(table, tbody);
     });
 }
@@ -61,7 +61,7 @@ function enableSorting(table, tbody) {
 
     th.addEventListener("click", () => {
       const rows = [...tbody.rows];
-
+      console.log("Row count:", tbody.rows.length);
       rows.sort(comparer(idx, asc));
 
       tbody.append(...rows);
