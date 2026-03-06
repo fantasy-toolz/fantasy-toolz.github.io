@@ -19,11 +19,9 @@ body {
 
 /* Core table styling */
 table {
-    border-collapse: collapse;
-    width: 100%;
-    min-width: 900px; /* prevents columns collapsing too much */
-    table-layout: fixed; /* enables consistent column widths */
-    background: white;
+    border-collapse: separate;
+    border-spacing: 0;
+}
 }
 
 /* Header styling */
@@ -45,6 +43,10 @@ td {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+tbody {
+    contain: layout;
 }
 
 /* Alternating rows */

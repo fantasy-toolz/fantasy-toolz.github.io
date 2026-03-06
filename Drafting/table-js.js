@@ -61,10 +61,18 @@ function enableSorting(table, tbody) {
 
     th.addEventListener("click", () => {
       const rows = [...tbody.rows];
-      console.log("Row count:", tbody.rows.length);
+
       rows.sort(comparer(idx, asc));
 
-      tbody.append(...rows);
+      const frag = document.createDocumentFragment();
+      rows.forEach(tr => frag.appendChild(tr));
+
+      tbody.appendChild(frag);
+
+      /* force repaint */
+      tbody.style.display = "none";
+      tbody.offsetHeight;
+      tbody.style.display = "";
 
       asc = !asc;
     });
