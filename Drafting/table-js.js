@@ -53,9 +53,11 @@ function enableSorting(table, tbody) {
     let asc = true;
 
     th.addEventListener("click", () => {
-      Array.from(tbody.querySelectorAll("tr"))
-        .sort(comparer(idx, asc))
-        .forEach(tr => tbody.appendChild(tr));
+      const rows = Array.from(tbody.querySelectorAll("tr"));
+
+      rows.sort(comparer(idx, asc));
+
+      rows.forEach(tr => tbody.appendChild(tr));
 
       asc = !asc;
     });
