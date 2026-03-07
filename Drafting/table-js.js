@@ -2,7 +2,7 @@ function buildSortableTable(tableId, csvUrl) {
   fetch(csvUrl)
     .then(r => r.text())
     .then(text => {
-      const rows = text.trim().split(/\r?\n/).map(r => r.split(","));
+      const rows = text.trim().split("\n").map(r => r.split(","));
       const table = document.getElementById(tableId);
 
       // Clear existing content
@@ -30,49 +30,32 @@ function buildSortableTable(tableId, csvUrl) {
         }
       });
 
-      
       enableSorting(table, tbody);
     });
 }
 
 function enableSorting(table, tbody) {
-  const getCellValue = (tr, idx) => tr.children[idx].textContent;
+  const getCellValue = (tr, idx) =>
+    tr.children[idx].innerText || tr.children[idx].textContent;
 
   const comparer = (idx, asc) => (a, b) => {
-    const v1 = getCellValue(a, idx);
-    const v2 = getCellValue(b, idx);
+    const v1 = getCellValue(asc ? a : b, idx);
+    const v2 = getCellValue(asc ? b : a, idx);
 
-    const n1 = parseFloat(v1);
-    const n2 = parseFloat(v2);
-
-    let result;
-
-    if (!isNaN(n1) && !isNaN(n2)) {
-      result = n1 - n2;
-    } else {
-      result = v1.localeCompare(v2);
+    if (v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2)) {
+      return v1 - v2;
     }
 
-    return asc ? result : -result;
+    return v1.toString().localeCompare(v2);
   };
 
   table.querySelectorAll("thead th").forEach((th, idx) => {
     let asc = true;
 
     th.addEventListener("click", () => {
-      const rows = [...tbody.rows];
-
-      rows.sort(comparer(idx, asc));
-
-      const frag = document.createDocumentFragment();
-      rows.forEach(tr => frag.appendChild(tr));
-
-      tbody.appendChild(frag);
-
-      /* force repaint */
-      tbody.style.display = "none";
-      tbody.offsetHeight;
-      tbody.style.display = "";
+      Array.from(tbody.querySelectorAll("tr"))
+        .sort(comparer(idx, asc))
+        .forEach(tr => tbody.appendChild(tr));
 
       asc = !asc;
     });
